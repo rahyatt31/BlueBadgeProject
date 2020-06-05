@@ -8,7 +8,7 @@ namespace FootballManager.Models.Team
 {
     public class EditTeam
     {
-        public Guid TeamID { get; set; }
+        public int TeamID { get; set; }
         public string TeamName { get; set; }
         //public int TeamOffenseYardsPerGame { get; set; }
         //public double TeamOffensePointsPerGame { get; set; }
