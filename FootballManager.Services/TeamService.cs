@@ -46,7 +46,7 @@ namespace FootballManagerServices
                 return query.ToArray();
             }
         }
-        public DetailTeam GetTeamByID(Guid teamId)
+        public DetailTeam GetTeamByID(int teamId)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -82,7 +82,7 @@ namespace FootballManagerServices
                 return ctx.SaveChanges() == 1;
             }
         }
-        public bool DeleteTeam(Guid teamId)
+        public bool DeleteTeam(int teamId)
         {
             using (var ctx = new ApplicationDbContext())
             {
