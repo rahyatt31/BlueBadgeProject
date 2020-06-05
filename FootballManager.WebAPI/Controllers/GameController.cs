@@ -12,6 +12,12 @@ namespace FootballManager.WebAPI.Controllers
 {
     public class GameController : ApiController
     {
+        private GameService CreateGameService()
+        {
+            var gameID = Guid.Parse(User.Identity.GetUserId());
+            var gameService = new GameService(gameID);
+            return gameService;
+        }
         public IHttpActionResult Get()
         {
             GameService gameService = CreateGameService();
@@ -27,12 +33,6 @@ namespace FootballManager.WebAPI.Controllers
                 return InternalServerError();
             return Ok();
         }
-        private GameService CreateGameService()
-        {
-            var gameID = Guid.Parse(User.Identity.GetUserId());
-            var gameService = new GameService(gameID);
-            return gameService;
-        }
         public IHttpActionResult Get(int id)
         {
             GameService gameService = CreateGameService();
@@ -43,14 +43,14 @@ namespace FootballManager.WebAPI.Controllers
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
-            var service = GameService();
+            var service = CreateGameService();
             if (!service.UpdateGame(game))
                 return InternalServerError();
             return Ok();
         }
         public IHttpActionResult Delete(int id)
         {
-            var service = GameService();
+            var service = CreateGameService();
             if (!service.DeleteGame(id))
                 return InternalServerError();
             return Ok();

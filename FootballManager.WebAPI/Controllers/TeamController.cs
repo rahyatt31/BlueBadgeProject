@@ -12,6 +12,12 @@ namespace FootballManager.WebAPI.Controllers
 {
     public class TeamController : ApiController
     {
+        private TeamService CreateTeamService()
+        {
+            var teamID = Guid.Parse(User.Identity.GetUserId());
+            var teamService = new TeamService(teamID);
+            return teamService;
+        }
         public IHttpActionResult Get()
         {
             TeamService teamService = CreateTeamService();
@@ -27,13 +33,7 @@ namespace FootballManager.WebAPI.Controllers
                 return InternalServerError();
             return Ok();
         }
-        private TeamService CreateTeamService()
-        {
-            var teamID = Guid.Parse(User.Identity.GetUserId());
-            var teamService = new TeamService(teamID);
-            return teamService;
-        }
-        public IHttpActionResult Get(int id)
+        public IHttpActionResult Get(Guid id)
         {
             TeamService teamService = CreateTeamService();
             var team = teamService.GetTeamByID(id);
@@ -48,7 +48,7 @@ namespace FootballManager.WebAPI.Controllers
                 return InternalServerError();
             return Ok();
         }
-        public IHttpActionResult Delete(int id)
+        public IHttpActionResult Delete(Guid id)
         {
             var service = CreateTeamService();
             if (!service.DeleteTeam(id))

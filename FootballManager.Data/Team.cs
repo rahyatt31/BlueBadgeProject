@@ -10,7 +10,7 @@ namespace FootballManager.Data
     public class Team
     {
         [Key]
-        public int TeamID { get; set; }
+        public Guid TeamID { get; set; }
 
         [Required]
         public string TeamName { get; set; }

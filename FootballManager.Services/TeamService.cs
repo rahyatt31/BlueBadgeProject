@@ -46,7 +46,7 @@ namespace FootballManagerServices
                 return query.ToArray();
             }
         }
-        public DetailTeam GetTeamByID(int teamId)
+        public DetailTeam GetTeamByID(Guid teamId)
         {
             using (var ctx = new ApplicationDbContext())
             {
@@ -77,12 +77,12 @@ namespace FootballManagerServices
                 var entity =
                     ctx
                         .Teams
-                        .Single(e => e.TeamID = model.TeamID);
+                        .Single(e => e.TeamID == model.TeamID);
                 entity.TeamName = model.TeamName;
                 return ctx.SaveChanges() == 1;
             }
         }
-        public bool DeleteTeam(int teamId)
+        public bool DeleteTeam(Guid teamId)
         {
             using (var ctx = new ApplicationDbContext())
             {
