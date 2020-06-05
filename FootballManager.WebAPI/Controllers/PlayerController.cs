@@ -1,5 +1,5 @@
-﻿using BlueBadgeServices;
-using FootballManager.Models.Player;
+﻿using FootballManager.Models.Player;
+using FootballManagerServices;
 using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
@@ -12,6 +12,12 @@ namespace FootballManager.WebAPI.Controllers
 {
     public class PlayerController : ApiController
     {
+        private PlayerService CreatePlayerService()
+        {
+            var playerID = Guid.Parse(User.Identity.GetUserId());
+            var playerService = new PlayerService(playerID);
+            return playerService;
+        }
         public IHttpActionResult Get()
         {
             PlayerService playerService = CreatePlayerService();
@@ -26,12 +32,6 @@ namespace FootballManager.WebAPI.Controllers
             if (!service.CreatePlayer(player))
                 return InternalServerError();
             return Ok();
-        }
-        private PlayerService CreatePlayerService()
-        {
-            var playerID = Guid.Parse(User.Identity.GetUserId());
-            var playerService = new PlayerService(playerID);
-            return playerService;
         }
         public IHttpActionResult Get(int id)
         {

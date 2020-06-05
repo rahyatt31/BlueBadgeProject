@@ -8,7 +8,7 @@ namespace FootballManager.Models.Game
 {
     public class EditGame
     {
-        public int GameInfoID { get; set; }         // Able to change the gameID
+        public int GameID { get; set; }         // Able to change the gameID
         public int HomeTeamID { get; set; }         // Able to change the Home Team
         public int AwayTeamID { get; set; }         // Able to change the Away Team
         public DateTime GameDate { get; set; }      // Able to change the Date of the Game
