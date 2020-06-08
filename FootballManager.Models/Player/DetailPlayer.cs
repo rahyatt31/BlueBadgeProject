@@ -9,7 +9,8 @@ namespace FootballManager.Models.Player
     public class DetailPlayer
     {
         public int PlayerID { get; set; }
-        public Guid TeamID { get; set; }
+        public int TeamID { get; set; }
+        public string TeamName { get; set; }
         public string PlayerFirstName { get; set; }
         public string PlayerLastName { get; set; }
         public string PlayerPosition { get; set; }

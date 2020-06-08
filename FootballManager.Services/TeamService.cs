@@ -39,7 +39,7 @@ namespace FootballManagerServices
                             e =>
                                 new ListTeam
                                 {
-                                    //TeamID = e.TeamID,
+                                    TeamID = e.TeamID,
                                     TeamName = e.TeamName
                                 }
                         );
@@ -57,7 +57,7 @@ namespace FootballManagerServices
                 return
                     new DetailTeam
                     {
-                        //TeamID = entity.TeamID,
+                        TeamID = entity.TeamID,
                         TeamName = entity.TeamName,
                         //TeamOffenseYardsPerGame = entity.TeamOffenseYardsPerGame,
                         //TeamOffensePointsPerGame = entity.TeamOffensePointsPerGame,

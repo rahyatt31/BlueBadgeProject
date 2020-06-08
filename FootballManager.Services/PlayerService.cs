@@ -20,6 +20,7 @@ namespace FootballManagerServices
             var entity = new Player()
             {
                 PlayerID = model.PlayerID,
+                TeamID = model.TeamID,
                 PlayerFirstName = model.PlayerFirstName,
                 PlayerLastName = model.PlayerLastName,
                 PlayerPosition = model.PlayerPosition,
@@ -46,7 +47,8 @@ namespace FootballManagerServices
                                 new ListPlayer
                                 {
                                     PlayerID = e.PlayerID,
-                                    //TeamID = e.TeamID,
+                                    TeamID = e.TeamID,
+                                    TeamName = e.Team.TeamName, //available because of 'virtual'
                                     PlayerFirstName = e.PlayerFirstName,
                                     PlayerLastName = e.PlayerLastName,
                                     PlayerPosition = e.PlayerPosition,
@@ -70,7 +72,7 @@ namespace FootballManagerServices
                     new DetailPlayer
                     {
                         PlayerID = entity.PlayerID,
-                        //TeamID = entity.TeamID,
+                        TeamID = entity.TeamID,
                         PlayerFirstName = entity.PlayerFirstName,
                         PlayerLastName = entity.PlayerLastName,
                         PlayerPosition = entity.PlayerPosition,
@@ -89,6 +91,7 @@ namespace FootballManagerServices
                         .Players
                         .Single(e => e.PlayerID == model.PlayerID);
                 entity.PlayerID = model.PlayerID;
+                entity.TeamID = model.TeamID;
                 entity.PlayerFirstName = model.PlayerFirstName;
                 entity.PlayerLastName = model.PlayerLastName;
                 entity.PlayerPosition = model.PlayerPosition;

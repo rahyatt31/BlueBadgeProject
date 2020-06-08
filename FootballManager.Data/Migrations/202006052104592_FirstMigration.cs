@@ -21,8 +21,8 @@ namespace FootballManager.Data.Migrations
                     })
                 .PrimaryKey(t => t.GameID)
                 .ForeignKey("dbo.Team", t => t.Team_TeamID)
-                .ForeignKey("dbo.Team", t => t.AwayTeamID, cascadeDelete: true)
-                .ForeignKey("dbo.Team", t => t.HomeTeamID, cascadeDelete: true)
+                .ForeignKey("dbo.Team", t => t.AwayTeamID, cascadeDelete: false)
+                .ForeignKey("dbo.Team", t => t.HomeTeamID, cascadeDelete: false)
                 .Index(t => t.HomeTeamID)
                 .Index(t => t.AwayTeamID)
                 .Index(t => t.Team_TeamID);
