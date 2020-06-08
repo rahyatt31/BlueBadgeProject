@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace FootballManager.Data
 {
-    public class PlayerStat
+    public class PlayerStats
     {
         [Key]
-        public int PlayerStats { get; set; }
+        public int PlayerStatsID { get; set; }
 
         [Required]
         public int PassingYards { get; set; }

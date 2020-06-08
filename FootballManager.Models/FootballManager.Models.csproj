@@ -58,6 +58,10 @@
     <Compile Include="Game\DetailGame.cs" />
     <Compile Include="Game\EditGame.cs" />
     <Compile Include="Game\ListGame.cs" />
+    <Compile Include="PlayerStats\CreatePlayerStats.cs" />
+    <Compile Include="PlayerStats\DetailPlayerStats.cs" />
+    <Compile Include="PlayerStats\EditPlayerStats.cs" />
+    <Compile Include="PlayerStats\ListPlayerStats.cs" />
     <Compile Include="Player\CreatePlayer.cs" />
     <Compile Include="Player\DetailPlayer.cs" />
     <Compile Include="Player\EditPlayer.cs" />
@@ -72,6 +76,5 @@
     <None Include="App.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

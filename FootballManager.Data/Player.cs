@@ -30,6 +30,6 @@ namespace FootballManager.Data
         public int TeamID { get; set; }
         public virtual Team Team { get; set; }
 
-        public virtual ICollection<PlayerStat> PlayerStats { get; set; }
+        public virtual ICollection<PlayerStats> PlayerStats { get; set; }
     }
 }
