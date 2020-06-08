@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FootballManager.Models.Player;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,6 +12,8 @@ namespace FootballManager.Models.Team
     {
         public int TeamID { get; set; }
         public string TeamName { get; set; }
+        //public List<DetailPlayer> TeamPlayers { get; set; }
+
 
         //public int TeamOffenseYardsPerGame { get; set; }
         //public double TeamOffensePointsPerGame { get; set; }

@@ -61,4 +61,5 @@ namespace FootballManager.Data
         public int DefensiveStatsID { get; set; }
         public virtual Player Defense { get; set; }
     }
+
 }
