@@ -51,10 +51,10 @@ namespace FootballManagerServices
                                     TeamName = e.Team.TeamName, //available because of 'virtual'
                                     PlayerFirstName = e.PlayerFirstName,
                                     PlayerLastName = e.PlayerLastName,
-                                    PlayerPosition = e.PlayerPosition,
-                                    PlayerJerseyNumber = e.PlayerJerseyNumber,
-                                    PlayerHeightByInches = e.PlayerHeightByInches,
-                                    PlayerWeightByPounds = e.PlayerWeightByPounds
+                                    //PlayerPosition = e.PlayerPosition,
+                                    //PlayerJerseyNumber = e.PlayerJerseyNumber,
+                                    //PlayerHeightByInches = e.PlayerHeightByInches,
+                                    //PlayerWeightByPounds = e.PlayerWeightByPounds
                                 }
                         );
                 return query.ToArray();

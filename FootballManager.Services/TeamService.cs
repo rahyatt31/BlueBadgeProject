@@ -60,8 +60,7 @@ namespace FootballManagerServices
                     {
                         TeamID = entity.TeamID,
                         TeamName = entity.TeamName,
-                        //TeamPlayers = entity.Players.
-
+                        //TeamPlayers = entity.TeamID.TeamPlayers
 
                         //TeamOffenseYardsPerGame = entity.TeamOffenseYardsPerGame,
                         //TeamOffensePointsPerGame = entity.TeamOffensePointsPerGame,

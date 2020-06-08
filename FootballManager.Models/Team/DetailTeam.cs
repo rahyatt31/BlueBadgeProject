@@ -12,8 +12,7 @@ namespace FootballManager.Models.Team
     {
         public int TeamID { get; set; }
         public string TeamName { get; set; }
-        //public List<DetailPlayer> TeamPlayers { get; set; }
-
+        public List<ListPlayer> TeamPlayers { get; set; } //Get ICollection into List<ListPlayer>
 
         //public int TeamOffenseYardsPerGame { get; set; }
         //public double TeamOffensePointsPerGame { get; set; }
