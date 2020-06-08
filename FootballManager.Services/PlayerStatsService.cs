@@ -1,4 +1,5 @@
 ﻿using FootballManager.Data;
+using FootballManager.Models.PlayerStats;
 using System;
 using System.Collections.Generic;
 using System.Linq;
