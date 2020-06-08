@@ -20,6 +20,7 @@ namespace FootballManagerServices
             var entity = new Team()
             {
                 TeamName = model.TeamName
+                //TeamPlayers = model.Player.TeamID
             };
             using (var ctx = new ApplicationDbContext())
             {
@@ -59,6 +60,8 @@ namespace FootballManagerServices
                     {
                         TeamID = entity.TeamID,
                         TeamName = entity.TeamName,
+                        //TeamPlayers = entity.Players.
+
                         //TeamOffenseYardsPerGame = entity.TeamOffenseYardsPerGame,
                         //TeamOffensePointsPerGame = entity.TeamOffensePointsPerGame,
                         //TeamOffensiveTouchdownsPerGame = entity.TeamOffensiveTouchdownsPerGame,
