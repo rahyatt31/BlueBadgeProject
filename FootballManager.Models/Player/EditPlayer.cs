@@ -9,7 +9,7 @@ namespace FootballManager.Models.Player
     public class EditPlayer
     {
         public int PlayerID { get; set; }
-        public Guid TeamID { get; set; }
+        public int TeamID { get; set; }
         public string PlayerFirstName { get; set; }
         public string PlayerLastName { get; set; }
         public string PlayerPosition { get; set; }

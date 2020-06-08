@@ -10,7 +10,8 @@ namespace FootballManager.Models.Player
     public class CreatePlayer
     {
         public int PlayerID { get; set; }
-        public Guid TeamID { get; set; }
+        [Required]
+        public int TeamID { get; set; }
 
         [Required]
         public string PlayerFirstName { get; set; }
@@ -18,10 +19,11 @@ namespace FootballManager.Models.Player
         public string PlayerLastName { get; set; }
 
         [MaxLength(2, ErrorMessage = "Please enter the abbriviation with consisting of only 2 characters. (QB, RB, WR, TE, OL, DL, LB, CB, FS, SS)")]
+        //Stretch Goal -- Make Enum
         public string PlayerPosition { get; set; }
 
         [Required]
-        [MaxLength(2, ErrorMessage = "Please enter the abbriviation with consisting of only 2 characters. (01-99)")]
+        //[MaxLength(2, ErrorMessage = "Please enter the abbriviation with consisting of only 2 characters. (01-99)")]
         public int PlayerJerseyNumber { get; set; }
 
         [Required]
