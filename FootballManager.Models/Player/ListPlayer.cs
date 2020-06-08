@@ -13,9 +13,9 @@ namespace FootballManager.Models.Player
         public string TeamName { get; set; }
         public string PlayerFirstName { get; set; }
         public string PlayerLastName { get; set; }
-        public string PlayerPosition { get; set; }
-        public int PlayerJerseyNumber { get; set; }
-        public double PlayerHeightByInches { get; set; }
-        public double PlayerWeightByPounds { get; set; }
+        //public string PlayerPosition { get; set; }
+        //public int PlayerJerseyNumber { get; set; }
+        //public double PlayerHeightByInches { get; set; }
+        //public double PlayerWeightByPounds { get; set; }
     }
 }

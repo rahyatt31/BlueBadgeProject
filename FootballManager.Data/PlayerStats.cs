@@ -52,6 +52,10 @@ namespace FootballManager.Data
         [Required]
         public int ReturnTouchDown { get; set; }
 
+        //Need to check later
+        [ForeignKey("Player")]
+        public int PlayerID { get; set; }
+        public virtual Player Player { get; set; }
 
         [ForeignKey("Offense")]
         public int OffensiveStatsID { get; set; }

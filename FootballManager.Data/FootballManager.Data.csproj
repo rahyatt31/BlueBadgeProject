@@ -90,6 +90,10 @@
     <Compile Include="Migrations\202006052104592_FirstMigration.Designer.cs">
       <DependentUpon>202006052104592_FirstMigration.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006082059517_Added PlayerStats.cs" />
+    <Compile Include="Migrations\202006082059517_Added PlayerStats.Designer.cs">
+      <DependentUpon>202006082059517_Added PlayerStats.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerStats.cs" />
@@ -103,6 +107,9 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202006052104592_FirstMigration.resx">
       <DependentUpon>202006052104592_FirstMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006082059517_Added PlayerStats.resx">
+      <DependentUpon>202006082059517_Added PlayerStats.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
