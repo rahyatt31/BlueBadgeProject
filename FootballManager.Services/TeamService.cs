@@ -59,6 +59,7 @@ namespace FootballManagerServices
                     {
                         TeamID = entity.TeamID,
                         TeamName = entity.TeamName,
+
                         //TeamOffenseYardsPerGame = entity.TeamOffenseYardsPerGame,
                         //TeamOffensePointsPerGame = entity.TeamOffensePointsPerGame,
                         //TeamOffensiveTouchdownsPerGame = entity.TeamOffensiveTouchdownsPerGame,
@@ -70,6 +71,7 @@ namespace FootballManagerServices
                     };
             }
         }
+
         public bool UpdateTeam(EditTeam model)
         {
             using (var ctx = new ApplicationDbContext())
