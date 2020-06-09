@@ -10,7 +10,6 @@ namespace FootballManager.Models.PlayerStats
     {
         public int PlayerStatsID { get; set; }
         public int PlayerID { get; set; }
-
         public int PassingYards { get; set; }
         public int PassingTouchdowns { get; set; }
         public int InterceptionThrown { get; set; }

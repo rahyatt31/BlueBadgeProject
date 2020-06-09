@@ -1,4 +1,6 @@
 ﻿using FootballManager.Data;
+using FootballManager.Models.Player;
+using FootballManager.Models.PlayerStats;
 using FootballManager.Models.Team;
 using System;
 using System.Collections.Generic;
@@ -10,7 +12,7 @@ namespace FootballManagerServices
 {
     public class TeamService
     {
-        private readonly Guid _userID; // Need to be Guid?
+        private readonly Guid _userID;
         public TeamService(Guid userID)
         {
             _userID = userID;
@@ -20,7 +22,6 @@ namespace FootballManagerServices
             var entity = new Team()
             {
                 TeamName = model.TeamName
-                //TeamPlayers = model.Player.TeamID
             };
             using (var ctx = new ApplicationDbContext())
             {
@@ -35,7 +36,6 @@ namespace FootballManagerServices
                 var query =
                     ctx
                         .Teams
-                        //.Where(e => e.UserID == _userID)
                         .Select(
                             e =>
                                 new ListTeam
@@ -55,21 +55,24 @@ namespace FootballManagerServices
                     ctx
                         .Teams
                         .Single(e => e.TeamID == teamId);
+                List<ListPlayer> roster = entity.Players
+                .Select(
+                    e =>
+                        new ListPlayer
+                        {
+                            PlayerID = e.PlayerID,
+                            TeamID = e.TeamID,
+                            TeamName = e.Team.TeamName, //available because of 'virtual'
+                            PlayerFirstName = e.PlayerFirstName,
+                            PlayerLastName = e.PlayerLastName
+                        }
+                    ).ToList();
                 return
                     new DetailTeam
                     {
                         TeamID = entity.TeamID,
                         TeamName = entity.TeamName,
-                        //TeamPlayers = entity.TeamID.TeamPlayers
-
-                        //TeamOffenseYardsPerGame = entity.TeamOffenseYardsPerGame,
-                        //TeamOffensePointsPerGame = entity.TeamOffensePointsPerGame,
-                        //TeamOffensiveTouchdownsPerGame = entity.TeamOffensiveTouchdownsPerGame,
-                        //TeamOffenseTurnoversPerGame = entity.TeamOffenseTurnoversPerGame
-                        //TeamDefenseYardsPerGame = entity.TeamDefenseYardsPerGame
-                        //TeamDefensePointsPerGame = entity.TeamDefensePointsPerGame
-                        //TeamDefenseTurnoversPerGame = entity.TeamDefenseTurnoversPerGame
-                        //TeamDefensiveTouchdownsPerGame = entity.TeamDefensiveTouchdownsPerGame
+                        TeamPlayers = roster
                     };
             }
         }

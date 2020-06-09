@@ -1,6 +1,5 @@
 ﻿using FootballManager.Data;
 using FootballManager.Models.Game;
-//using FootballManager.WebAPI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +10,7 @@ namespace FootballManagerServices
 {
     public class GameService
     {
-        private readonly Guid _userID; // Need to be Guid?
+        private readonly Guid _userID;
         public GameService(Guid userID)
         {
             _userID = userID;
@@ -40,7 +39,6 @@ namespace FootballManagerServices
                 var query =
                     ctx
                         .Games
-                        //.Where(e => e.UserID == _userID)
                         .Select(
                             e =>
                                 new ListGame

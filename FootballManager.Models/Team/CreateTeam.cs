@@ -11,21 +11,5 @@ namespace FootballManager.Models.Team
     {
         public int TeamID { get; set; }
         public string TeamName { get; set; }
-        //[Required]
-        //public int TeamOffenseYardsPerGame { get; set; }
-        //[Required]
-        //public double TeamOffensePointsPerGame { get; set; }
-        //[Required]
-        //public double TeamOffensiveTouchdownsPerGame { get; set; }
-        //[Required]
-        //public double TeamOffenseTurnoversPerGame { get; set; }
-        //[Required]
-        //public int TeamDefenseYardsPerGame { get; set; }
-        //[Required]
-        //public double TeamDefensePointsPerGame { get; set; }
-        //[Required]
-        //public double TeamDefenseTurnoversPerGame { get; set; }
-        //[Required]
-        //public double TeamDefensiveTouchdownsPerGame { get; set; }
     }
 }

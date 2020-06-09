@@ -1,5 +1,6 @@
 ﻿using FootballManager.Data;
 using FootballManager.Models.Player;
+using FootballManager.Models.PlayerStats;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,7 @@ namespace FootballManagerServices
 {
     public class PlayerService
     {
-        private readonly Guid _userID; // Need to be Guid?
+        private readonly Guid _userID;
         public PlayerService(Guid userID)
         {
             _userID = userID;
@@ -41,7 +42,6 @@ namespace FootballManagerServices
                 var query =
                     ctx
                         .Players
-                        //.Where(e => e.UserID == _userID)
                         .Select(
                             e =>
                                 new ListPlayer
@@ -51,10 +51,6 @@ namespace FootballManagerServices
                                     TeamName = e.Team.TeamName, //available because of 'virtual'
                                     PlayerFirstName = e.PlayerFirstName,
                                     PlayerLastName = e.PlayerLastName,
-                                    //PlayerPosition = e.PlayerPosition,
-                                    //PlayerJerseyNumber = e.PlayerJerseyNumber,
-                                    //PlayerHeightByInches = e.PlayerHeightByInches,
-                                    //PlayerWeightByPounds = e.PlayerWeightByPounds
                                 }
                         );
                 return query.ToArray();
@@ -68,17 +64,46 @@ namespace FootballManagerServices
                     ctx
                         .Players
                         .Single(e => e.PlayerID == playerId);
+                List<ListPlayerStats> roster = entity.PlayerStats
+                .Select(
+                    e =>
+                        new ListPlayerStats
+                        {
+                            PlayerStatsID = e.PlayerStatsID,
+                            PlayerID = e.PlayerID,
+                            PassingYards = e.PassingYards,
+                            PassingTouchdowns = e.PassingTouchdowns,
+                            InterceptionThrown = e.InterceptionThrown,
+                            RushingYards = e.RushingYards,
+                            RushingAttempts = e.RushingAttempts,
+                            RushingTouchDowns = e.RushingTouchDowns,
+                            ReceivingYards = e.ReceivingYards,
+                            Catches = e.Catches,
+                            ReceivingTouchDowns = e.ReceivingTouchDowns,
+                            Fumbles = e.Fumbles,
+                            Tackles = e.Tackles,
+                            Sacks = e.Sacks,
+                            Interceptions = e.Interceptions,
+                            ForcedFumbles = e.ForcedFumbles,
+                            FumbleRecovery = e.FumbleRecovery,
+                            Safety = e.Safety,
+                            BlockedKick = e.BlockedKick,
+                            ReturnTouchDown = e.ReturnTouchDown
+                        }
+                    ).ToList();
                 return
                     new DetailPlayer
                     {
                         PlayerID = entity.PlayerID,
                         TeamID = entity.TeamID,
+                        TeamName = entity.Team.TeamName,
                         PlayerFirstName = entity.PlayerFirstName,
                         PlayerLastName = entity.PlayerLastName,
                         PlayerPosition = entity.PlayerPosition,
                         PlayerJerseyNumber = entity.PlayerJerseyNumber,
                         PlayerHeightByInches = entity.PlayerHeightByInches,
-                        PlayerWeightByPounds = entity.PlayerWeightByPounds
+                        PlayerWeightByPounds = entity.PlayerWeightByPounds,
+                        PlayerStats = roster
                     };
             }
         }

@@ -23,7 +23,7 @@ namespace FootballManager.Models.Player
         public string PlayerPosition { get; set; }
 
         [Required]
-        //[MaxLength(2, ErrorMessage = "Please enter the abbriviation with consisting of only 2 characters. (01-99)")]
+        [Range(0,99, ErrorMessage = "Jersey number can only be 2 digits and has to be between 0 and 99.")]
         public int PlayerJerseyNumber { get; set; }
 
         [Required]
