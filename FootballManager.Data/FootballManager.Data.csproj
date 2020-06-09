@@ -94,6 +94,18 @@
     <Compile Include="Migrations\202006082059517_Added PlayerStats.Designer.cs">
       <DependentUpon>202006082059517_Added PlayerStats.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202006091419054_Removed PlayerID fk.cs" />
+    <Compile Include="Migrations\202006091419054_Removed PlayerID fk.Designer.cs">
+      <DependentUpon>202006091419054_Removed PlayerID fk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006091436302_undo Removed PlayerID fk.cs" />
+    <Compile Include="Migrations\202006091436302_undo Removed PlayerID fk.Designer.cs">
+      <DependentUpon>202006091436302_undo Removed PlayerID fk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202006091831060_June9th.cs" />
+    <Compile Include="Migrations\202006091831060_June9th.Designer.cs">
+      <DependentUpon>202006091831060_June9th.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="PlayerStats.cs" />
@@ -111,6 +123,21 @@
     <EmbeddedResource Include="Migrations\202006082059517_Added PlayerStats.resx">
       <DependentUpon>202006082059517_Added PlayerStats.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006091419054_Removed PlayerID fk.resx">
+      <DependentUpon>202006091419054_Removed PlayerID fk.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006091436302_undo Removed PlayerID fk.resx">
+      <DependentUpon>202006091436302_undo Removed PlayerID fk.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202006091831060_June9th.resx">
+      <DependentUpon>202006091831060_June9th.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FootballManager.Models\FootballManager.Models.csproj">
+      <Project>{0CF32D8B-87BE-48BC-8AF3-DEA1B7111474}</Project>
+      <Name>FootballManager.Models</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

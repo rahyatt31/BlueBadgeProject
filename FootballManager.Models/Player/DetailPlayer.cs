@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FootballManager.Models.PlayerStats;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,5 +18,6 @@ namespace FootballManager.Models.Player
         public int PlayerJerseyNumber { get; set; }
         public double PlayerHeightByInches { get; set; }
         public double PlayerWeightByPounds { get; set; }
+        public List<ListPlayerStats> PlayerStats { get; set; }
     }
 }
