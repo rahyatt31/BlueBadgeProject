@@ -536,6 +536,31 @@
             
             </summary>
         </member>
+        <member name="M:FootballManager.WebAPI.Controllers.GameController.Get">
+            <summary>
+            Looks up all Games.
+            </summary>
+        </member>
+        <member name="M:FootballManager.WebAPI.Controllers.GameController.Post(FootballManager.Models.Game.CreateGame)">
+            <summary>
+            Creates a Game with specific information.
+            </summary>
+        </member>
+        <member name="M:FootballManager.WebAPI.Controllers.GameController.Get(System.Int32)">
+            <summary>
+            Looks up a Game by its ID.
+            </summary>
+        </member>
+        <member name="M:FootballManager.WebAPI.Controllers.GameController.Put(FootballManager.Models.Game.EditGame)">
+            <summary>
+            Changes details about a Game.
+            </summary>
+        </member>
+        <member name="M:FootballManager.WebAPI.Controllers.GameController.Delete(System.Int32)">
+            <summary>
+            Deletes a Game by their ID.
+            </summary>
+        </member>
         <member name="M:FootballManager.WebAPI.Controllers.PlayerController.Get">
             <summary>
             Looks up all Players.
@@ -559,6 +584,31 @@
         <member name="M:FootballManager.WebAPI.Controllers.PlayerController.Delete(System.Int32)">
             <summary>
             Deletes a Player by their ID.
+            </summary>
+        </member>
+        <member name="M:FootballManager.WebAPI.Controllers.PlayerStatsController.Get">
+            <summary>
+            Looks up all Player Stats.
+            </summary>
+        </member>
+        <member name="M:FootballManager.WebAPI.Controllers.PlayerStatsController.Post(FootballManager.Models.PlayerStats.CreatePlayerStats)">
+            <summary>
+            Creates a Player Stat with specific information.
+            </summary>
+        </member>
+        <member name="M:FootballManager.WebAPI.Controllers.PlayerStatsController.Get(System.Int32)">
+            <summary>
+            Looks up a Player Stat by its ID.
+            </summary>
+        </member>
+        <member name="M:FootballManager.WebAPI.Controllers.PlayerStatsController.Put(FootballManager.Models.PlayerStats.EditPlayerStats)">
+            <summary>
+            Changes details about a Player Stat.
+            </summary>
+        </member>
+        <member name="M:FootballManager.WebAPI.Controllers.PlayerStatsController.Delete(System.Int32)">
+            <summary>
+            Deletes Player Stats by their ID.
             </summary>
         </member>
         <member name="M:FootballManager.WebAPI.Controllers.TeamController.Get">

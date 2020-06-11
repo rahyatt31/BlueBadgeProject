@@ -18,12 +18,18 @@ namespace FootballManager.WebAPI.Controllers
             var gameService = new GameService(gameID);
             return gameService;
         }
+        /// <summary>
+        /// Looks up all Games.
+        /// </summary>
         public IHttpActionResult Get()
         {
             GameService gameService = CreateGameService();
             var game = gameService.GetGame();
             return Ok(game);
         }
+        /// <summary>
+        /// Creates a Game with specific information.
+        /// </summary>
         public IHttpActionResult Post(CreateGame game)
         {
             if (!ModelState.IsValid)
@@ -33,12 +39,18 @@ namespace FootballManager.WebAPI.Controllers
                 return InternalServerError();
             return Ok();
         }
+        /// <summary>
+        /// Looks up a Game by its ID.
+        /// </summary>
         public IHttpActionResult Get(int id)
         {
             GameService gameService = CreateGameService();
             var game = gameService.GetGameByID(id);
             return Ok(game);
         }
+        /// <summary>
+        /// Changes details about a Game.
+        /// </summary>
         public IHttpActionResult Put(EditGame game)
         {
             if (!ModelState.IsValid)
@@ -48,6 +60,9 @@ namespace FootballManager.WebAPI.Controllers
                 return InternalServerError();
             return Ok();
         }
+        /// <summary>
+        /// Deletes a Game by their ID.
+        /// </summary>
         public IHttpActionResult Delete(int id)
         {
             var service = CreateGameService();
