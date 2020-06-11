@@ -51,7 +51,9 @@ namespace FootballManager.WebAPI.Controllers
         }
 
         public ISecureDataFormat<AuthenticationTicket> AccessTokenFormat { get; private set; }
-
+        /// <summary>
+        /// 
+        /// </summary>
         // GET api/Account/UserInfo
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]
         [Route("UserInfo")]
@@ -66,7 +68,9 @@ namespace FootballManager.WebAPI.Controllers
                 LoginProvider = externalLogin != null ? externalLogin.LoginProvider : null
             };
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         // POST api/Account/Logout
         [Route("Logout")]
         public IHttpActionResult Logout()
@@ -74,7 +78,9 @@ namespace FootballManager.WebAPI.Controllers
             Authentication.SignOut(CookieAuthenticationDefaults.AuthenticationType);
             return Ok();
         }
-
+        /// <summary>
+        ///
+        /// </summary>
         // GET api/Account/ManageInfo?returnUrl=%2F&generateState=true
         [Route("ManageInfo")]
         public async Task<ManageInfoViewModel> GetManageInfo(string returnUrl, bool generateState = false)
@@ -114,7 +120,9 @@ namespace FootballManager.WebAPI.Controllers
                 ExternalLoginProviders = GetExternalLogins(returnUrl, generateState)
             };
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         // POST api/Account/ChangePassword
         [Route("ChangePassword")]
         public async Task<IHttpActionResult> ChangePassword(ChangePasswordBindingModel model)
@@ -134,7 +142,9 @@ namespace FootballManager.WebAPI.Controllers
 
             return Ok();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         // POST api/Account/SetPassword
         [Route("SetPassword")]
         public async Task<IHttpActionResult> SetPassword(SetPasswordBindingModel model)
@@ -153,7 +163,9 @@ namespace FootballManager.WebAPI.Controllers
 
             return Ok();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         // POST api/Account/AddExternalLogin
         [Route("AddExternalLogin")]
         public async Task<IHttpActionResult> AddExternalLogin(AddExternalLoginBindingModel model)
@@ -191,7 +203,9 @@ namespace FootballManager.WebAPI.Controllers
 
             return Ok();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         // POST api/Account/RemoveLogin
         [Route("RemoveLogin")]
         public async Task<IHttpActionResult> RemoveLogin(RemoveLoginBindingModel model)
@@ -220,7 +234,9 @@ namespace FootballManager.WebAPI.Controllers
 
             return Ok();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         // GET api/Account/ExternalLogin
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalCookie)]
@@ -277,7 +293,9 @@ namespace FootballManager.WebAPI.Controllers
 
             return Ok();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         // GET api/Account/ExternalLogins?returnUrl=%2F&generateState=true
         [AllowAnonymous]
         [Route("ExternalLogins")]
@@ -318,7 +336,9 @@ namespace FootballManager.WebAPI.Controllers
 
             return logins;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         // POST api/Account/Register
         [AllowAnonymous]
         [Route("Register")]
@@ -340,7 +360,9 @@ namespace FootballManager.WebAPI.Controllers
 
             return Ok();
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
         // POST api/Account/RegisterExternal
         [OverrideAuthentication]
         [HostAuthentication(DefaultAuthenticationTypes.ExternalBearer)]

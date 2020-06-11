@@ -33,12 +33,18 @@ namespace FootballManager.WebAPI.Controllers
                 return InternalServerError();
             return Ok();
         }
+        /// <summary>
+        /// Looks up a Player by their ID.
+        /// </summary>
         public IHttpActionResult Get(int id)
         {
             PlayerService playerService = CreatePlayerService();
             var player = playerService.GetPlayerByID(id);
             return Ok(player);
         }
+        /// <summary>
+        /// Changes details about a Player.
+        /// </summary>
         public IHttpActionResult Put(EditPlayer player)
         {
             if (!ModelState.IsValid)
