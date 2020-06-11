@@ -536,6 +536,16 @@
             
             </summary>
         </member>
+        <member name="M:FootballManager.WebAPI.Controllers.PlayerController.Get">
+            <summary>
+            Looks up all Players.
+            </summary>
+        </member>
+        <member name="M:FootballManager.WebAPI.Controllers.PlayerController.Post(FootballManager.Models.Player.CreatePlayer)">
+            <summary>
+            Creates a Player with specific information.
+            </summary>
+        </member>
         <member name="M:FootballManager.WebAPI.Controllers.PlayerController.Get(System.Int32)">
             <summary>
             Looks up a Player by their ID.
@@ -544,6 +554,61 @@
         <member name="M:FootballManager.WebAPI.Controllers.PlayerController.Put(FootballManager.Models.Player.EditPlayer)">
             <summary>
             Changes details about a Player.
+            </summary>
+        </member>
+        <member name="M:FootballManager.WebAPI.Controllers.PlayerController.Delete(System.Int32)">
+            <summary>
+            Deletes a Player by their ID.
+            </summary>
+        </member>
+        <member name="M:FootballManager.WebAPI.Controllers.TeamController.Get">
+            <summary>
+            Looks up all Teams.
+            </summary>
+        </member>
+        <member name="M:FootballManager.WebAPI.Controllers.TeamController.Post(FootballManager.Models.Team.CreateTeam)">
+            <summary>
+            Creates a Team with specific information.
+            </summary>
+        </member>
+        <member name="M:FootballManager.WebAPI.Controllers.TeamController.Get(System.Int32)">
+            <summary>
+            Looks up a Team by their ID.
+            </summary>
+        </member>
+        <member name="M:FootballManager.WebAPI.Controllers.TeamController.Put(FootballManager.Models.Team.EditTeam)">
+            <summary>
+            Changes details about a Team.
+            </summary>
+        </member>
+        <member name="M:FootballManager.WebAPI.Controllers.TeamController.Delete(System.Int32)">
+            <summary>
+            Deletes a Team by their ID.
+            </summary>
+        </member>
+        <member name="M:FootballManager.WebAPI.Controllers.ValuesController.Get">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:FootballManager.WebAPI.Controllers.ValuesController.Get(System.Int32)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:FootballManager.WebAPI.Controllers.ValuesController.Post(System.String)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:FootballManager.WebAPI.Controllers.ValuesController.Put(System.Int32,System.String)">
+            <summary>
+            
+            </summary>
+        </member>
+        <member name="M:FootballManager.WebAPI.Controllers.ValuesController.Delete(System.Int32)">
+            <summary>
+            
             </summary>
         </member>
     </members>

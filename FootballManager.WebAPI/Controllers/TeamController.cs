@@ -18,12 +18,18 @@ namespace FootballManager.WebAPI.Controllers
             var teamService = new TeamService(teamID);
             return teamService;
         }
+        /// <summary>
+        /// Looks up all Teams.
+        /// </summary>
         public IHttpActionResult Get()
         {
             TeamService teamService = CreateTeamService();
             var teams = teamService.GetTeam();
             return Ok(teams);
         }
+        /// <summary>
+        /// Creates a Team with specific information.
+        /// </summary>
         public IHttpActionResult Post(CreateTeam team)
         {
             if (!ModelState.IsValid)
@@ -33,12 +39,18 @@ namespace FootballManager.WebAPI.Controllers
                 return InternalServerError();
             return Ok();
         }
+        /// <summary>
+        /// Looks up a Team by their ID.
+        /// </summary>
         public IHttpActionResult Get(int id)
         {
             TeamService teamService = CreateTeamService();
             var team = teamService.GetTeamByID(id);
             return Ok(team);
         }
+        /// <summary>
+        /// Changes details about a Team.
+        /// </summary>
         public IHttpActionResult Put(EditTeam team)
         {
             if (!ModelState.IsValid)
@@ -48,6 +60,9 @@ namespace FootballManager.WebAPI.Controllers
                 return InternalServerError();
             return Ok();
         }
+        /// <summary>
+        /// Deletes a Team by their ID.
+        /// </summary>
         public IHttpActionResult Delete(int id)
         {
             var service = CreateTeamService();

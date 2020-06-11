@@ -18,12 +18,18 @@ namespace FootballManager.WebAPI.Controllers
             var playerService = new PlayerService(playerID);
             return playerService;
         }
+        /// <summary>
+        /// Looks up all Players.
+        /// </summary>
         public IHttpActionResult Get()
         {
             PlayerService playerService = CreatePlayerService();
             var players = playerService.GetPlayer();
             return Ok(players);
         }
+        /// <summary>
+        /// Creates a Player with specific information.
+        /// </summary>
         public IHttpActionResult Post(CreatePlayer player)
         {
             if (!ModelState.IsValid)
@@ -54,6 +60,9 @@ namespace FootballManager.WebAPI.Controllers
                 return InternalServerError();
             return Ok();
         }
+        /// <summary>
+        /// Deletes a Player by their ID.
+        /// </summary>
         public IHttpActionResult Delete(int id)
         {
             var service = CreatePlayerService();
