@@ -1,5 +1,5 @@
-﻿using FootballManager.Models.Team;
-using FootballManagerServices;
+﻿using FootballManager.Models.PlayerStats;
+using FootballManager.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,33 +8,33 @@ using System.Web.Mvc;
 
 namespace FootballManager.WebAPI.Controllers
 {
-    public class TeamViewController : Controller
+    public class PlayerStatsViewController : Controller
     {
-        // GET: TeamView
+        // GET: PlayerStatsView
         public ActionResult Index()
         {
-            TeamService teamService = new TeamService();
-            return View(teamService.GetTeam());
+            PlayerStatsService playerStatsService = new PlayerStatsService();
+            return View(playerStatsService.GetPlayerStats());
         }
 
+        //Create
         [HttpGet]
         public ActionResult Create()
         {
             return View();
         }
-
         [HttpPost]
-        public ActionResult Create(CreateTeam ct)
+        public ActionResult Create(CreatePlayerStats cps)
         {
             if (this.ModelState.IsValid)
             {
-                TeamController tc = new TeamController();
-                tc.Post(ct);
+                PlayerStatsController psc = new PlayerStatsController();
+                psc.Post(cps);
                 return RedirectToAction("Index", "Home"); //LOOKUP: redirect to action (take to another page) 
             }
             else
             {
-                return View(ct);
+                return View(cps);
             }
         }
 
@@ -45,17 +45,17 @@ namespace FootballManager.WebAPI.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Edit(EditTeam et)
+        public ActionResult Edit(EditPlayerStats cps)
         {
             if (this.ModelState.IsValid)
             {
-                TeamController tc = new TeamController();
-                tc.Put(et);
+                PlayerStatsController psc = new PlayerStatsController();
+                psc.Put(cps);
                 return RedirectToAction("Index", "Home");
             }
             else
             {
-                return View(et);
+                return View(cps);
             }
         }
 
@@ -70,8 +70,8 @@ namespace FootballManager.WebAPI.Controllers
         {
             if (this.ModelState.IsValid)
             {
-                TeamController tc = new TeamController();
-                tc.Delete(id);
+                PlayerStatsController psc = new PlayerStatsController();
+                psc.Delete(id);
                 return RedirectToAction("Index", "Home");
             }
             else

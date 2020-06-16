@@ -14,9 +14,10 @@ namespace FootballManager.WebAPI.Controllers
     {
         private TeamService CreateTeamService()
         {
-            var teamID = Guid.Parse(User.Identity.GetUserId());
-            var teamService = new TeamService(teamID);
-            return teamService;
+            //var teamID = Guid.Parse(User.Identity.GetUserId());
+            //var teamService = new TeamService(teamID);
+            //return teamService;
+            return new TeamService();
         }
         /// <summary>
         /// Looks up all Teams.

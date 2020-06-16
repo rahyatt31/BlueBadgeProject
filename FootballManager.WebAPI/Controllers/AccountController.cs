@@ -344,8 +344,7 @@ namespace FootballManager.WebAPI.Controllers
         // POST api/Account/Register
         [AllowAnonymous]
         [Route("Register")]
-        [HttpPost]
-        public IHttpActionResult Register(RegisterBindingModel model)
+        public async Task<IHttpActionResult> Register(RegisterBindingModel model)
         {
             if (!ModelState.IsValid)
             {
@@ -354,7 +353,7 @@ namespace FootballManager.WebAPI.Controllers
 
             var user = new ApplicationUser() { UserName = model.Email, Email = model.Email };
 
-            IdentityResult result = UserManager.Create(user, model.Password);
+            IdentityResult result = await UserManager.CreateAsync(user, model.Password);
 
             if (!result.Succeeded)
             {
@@ -363,10 +362,10 @@ namespace FootballManager.WebAPI.Controllers
 
             //PlayerViewController pvc = new PlayerViewController();
             //pvc.Create();
-            var response = Request.CreateResponse(HttpStatusCode.Created);
-            response.Headers.Location = new Uri("https://localhost:44363/PlayerView/Create");
+            //var response = Request.CreateResponse(HttpStatusCode.Created);
+            //response.Headers.Location = new Uri("https://localhost:44363/PlayerView/Create");
 
-            return Ok(response);
+            return Ok();
         }
         /// <summary>
         /// 

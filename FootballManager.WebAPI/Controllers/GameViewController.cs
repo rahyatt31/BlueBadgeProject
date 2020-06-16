@@ -1,4 +1,4 @@
-﻿using FootballManager.Models.Team;
+﻿using FootballManager.Models.Game;
 using FootballManagerServices;
 using System;
 using System.Collections.Generic;
@@ -8,13 +8,13 @@ using System.Web.Mvc;
 
 namespace FootballManager.WebAPI.Controllers
 {
-    public class TeamViewController : Controller
+    public class GameViewController : Controller
     {
-        // GET: TeamView
+        // GET: GameCreate
         public ActionResult Index()
         {
-            TeamService teamService = new TeamService();
-            return View(teamService.GetTeam());
+            GameService gameService = new GameService();
+            return View(gameService.GetGame());
         }
 
         [HttpGet]
@@ -24,17 +24,17 @@ namespace FootballManager.WebAPI.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(CreateTeam ct)
+        public ActionResult Create(CreateGame cg)
         {
             if (this.ModelState.IsValid)
             {
-                TeamController tc = new TeamController();
-                tc.Post(ct);
-                return RedirectToAction("Index", "Home"); //LOOKUP: redirect to action (take to another page) 
+                GameController gc = new GameController();
+                gc.Post(cg);
+                return RedirectToAction("Index", "Home");
             }
             else
             {
-                return View(ct);
+                return View(cg);
             }
         }
 
@@ -45,17 +45,17 @@ namespace FootballManager.WebAPI.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult Edit(EditTeam et)
+        public ActionResult Edit(EditGame eg)
         {
             if (this.ModelState.IsValid)
             {
-                TeamController tc = new TeamController();
-                tc.Put(et);
+                GameController gc = new GameController();
+                gc.Put(eg);
                 return RedirectToAction("Index", "Home");
             }
             else
             {
-                return View(et);
+                return View(eg);
             }
         }
 
@@ -70,8 +70,8 @@ namespace FootballManager.WebAPI.Controllers
         {
             if (this.ModelState.IsValid)
             {
-                TeamController tc = new TeamController();
-                tc.Delete(id);
+                GameController gc = new GameController();
+                gc.Delete(id);
                 return RedirectToAction("Index", "Home");
             }
             else

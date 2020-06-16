@@ -1,4 +1,5 @@
 ﻿using FootballManager.Models.Player;
+using FootballManagerServices;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -14,19 +15,71 @@ namespace FootballManager.WebAPI.Controllers
         //GET: PlayerView
         public ActionResult Index()
         {
-            return View();
+            PlayerService playerService = new PlayerService();
+            return View(playerService.GetPlayer());
         }
-        [HttpGet] //this is where I get html from
+        
+        [HttpGet] //This is where I get html from
         public ActionResult Create()
         {
             return View();
         }
-        [HttpPost] //this is where it posts upon submit
+        
+        [HttpPost] //This is where it posts upon submit
         public ActionResult Create(CreatePlayer cp)
         {
-            PlayerController pc = new PlayerController();
-            pc.Post(cp);
-            return View(); //LOOKUP: redirect to action (take to another page) 
+            if (this.ModelState.IsValid)
+            {
+                PlayerController pc = new PlayerController();
+                pc.Post(cp);
+                return RedirectToAction("Index", "Home"); //LOOKUP: redirect to action (take to another page) 
+            }
+            else
+            {
+                return View(cp);
+            }
+        }
+
+        //Update
+        [HttpGet]
+        public ActionResult Edit()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Edit(EditPlayer ep)
+        {
+            if (this.ModelState.IsValid)
+            {
+                PlayerController pc = new PlayerController();
+                pc.Put(ep);
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return View(ep);
+            }
+        }
+
+        //Delete
+        [HttpGet]
+        public ActionResult Delete()
+        {
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Delete(int id)
+        {
+            if (this.ModelState.IsValid)
+            {
+                PlayerController pc = new PlayerController();
+                pc.Delete(id);
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                return View(id);
+            }
         }
     }
 }
