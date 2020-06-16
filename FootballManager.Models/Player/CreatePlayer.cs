@@ -1,15 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace FootballManager.Models.Player
 {
+    [NotMapped]
     public class CreatePlayer
     {
-        public int PlayerID { get; set; }
+        //public int PlayerID { get; set; } //not needed in model. Gets generated in the database
         [Required]
         public int TeamID { get; set; }
 

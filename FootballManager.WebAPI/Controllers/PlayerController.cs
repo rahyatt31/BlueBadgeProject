@@ -14,9 +14,10 @@ namespace FootballManager.WebAPI.Controllers
     {
         private PlayerService CreatePlayerService()
         {
-            var playerID = Guid.Parse(User.Identity.GetUserId());
-            var playerService = new PlayerService(playerID);
-            return playerService;
+            //var playerID = Guid.Parse(User.Identity.GetUserId());
+            //var playerService = new PlayerService(playerID);
+            //return playerService;
+            return new PlayerService(new Guid());
         }
         /// <summary>
         /// Looks up all Players.
