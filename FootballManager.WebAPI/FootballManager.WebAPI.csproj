@@ -211,11 +211,15 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GameViewController.cs" />
     <Compile Include="Controllers\GameController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\PlayerController.cs" />
     <Compile Include="Controllers\PlayerStatsController.cs" />
+    <Compile Include="Controllers\PlayerStatsViewController.cs" />
+    <Compile Include="Controllers\PlayerViewController.cs" />
     <Compile Include="Controllers\TeamController.cs" />
+    <Compile Include="Controllers\TeamViewController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -282,9 +286,27 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\PlayerView\Index.cshtml" />
+    <Content Include="Views\PlayerView\Create.cshtml" />
+    <Content Include="Views\TeamView\Create.cshtml" />
+    <Content Include="Views\GameView\Create.cshtml" />
+    <Content Include="Views\PlayerStatsView\Index.cshtml" />
+    <Content Include="Views\PlayerStatsView\Create.cshtml" />
+    <Content Include="Views\PlayerStatsView\Edit.cshtml" />
+    <Content Include="Views\PlayerStatsView\Delete.cshtml" />
+    <Content Include="Views\GameView\Edit.cshtml" />
+    <Content Include="Views\GameView\Delete.cshtml" />
+    <Content Include="Views\TeamView\Edit.cshtml" />
+    <Content Include="Views\TeamView\Delete.cshtml" />
+    <Content Include="Views\PlayerView\Edit.cshtml" />
+    <Content Include="Views\PlayerView\Delete.cshtml" />
+    <Content Include="Views\GameView\Index.cshtml" />
+    <Content Include="Views\TeamView\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Default\" />
+    <Folder Include="Views\ShowPlayers\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

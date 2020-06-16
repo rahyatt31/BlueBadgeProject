@@ -17,6 +17,8 @@ using FootballManager.WebAPI.Models;
 using FootballManager.WebAPI.Providers;
 using FootballManager.WebAPI.Results;
 using FootballManager.Data;
+using System.Net;
+//using System.Web.Mvc;
 
 namespace FootballManager.WebAPI.Controllers
 {
@@ -357,6 +359,11 @@ namespace FootballManager.WebAPI.Controllers
             {
                 return GetErrorResult(result);
             }
+
+            //PlayerViewController pvc = new PlayerViewController();
+            //pvc.Create();
+            //var response = Request.CreateResponse(HttpStatusCode.Created);
+            //response.Headers.Location = new Uri("https://localhost:44363/PlayerView/Create");
 
             return Ok();
         }

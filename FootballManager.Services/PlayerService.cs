@@ -16,11 +16,16 @@ namespace FootballManagerServices
         {
             _userID = userID;
         }
+
+        public PlayerService()
+        {
+        }
+
         public bool CreatePlayer(CreatePlayer model)
         {
             var entity = new Player()
             {
-                PlayerID = model.PlayerID,
+                //PlayerID = model.PlayerID,
                 TeamID = model.TeamID,
                 PlayerFirstName = model.PlayerFirstName,
                 PlayerLastName = model.PlayerLastName,

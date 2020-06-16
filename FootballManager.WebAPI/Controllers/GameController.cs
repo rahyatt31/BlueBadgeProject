@@ -14,9 +14,10 @@ namespace FootballManager.WebAPI.Controllers
     {
         private GameService CreateGameService()
         {
-            var gameID = Guid.Parse(User.Identity.GetUserId());
-            var gameService = new GameService(gameID);
-            return gameService;
+            //var gameID = Guid.Parse(User.Identity.GetUserId());
+            //var gameService = new GameService(gameID);
+            //return gameService;
+            return new GameService();
         }
         /// <summary>
         /// Looks up all Games.

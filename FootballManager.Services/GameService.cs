@@ -15,6 +15,11 @@ namespace FootballManagerServices
         {
             _userID = userID;
         }
+
+        public GameService()
+        {
+        }
+
         public bool CreateGame(CreateGame model)
         {
             var entity = new Game()
