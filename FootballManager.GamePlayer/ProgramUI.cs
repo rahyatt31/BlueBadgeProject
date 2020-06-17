@@ -396,11 +396,11 @@ namespace FootballManager.GamePlayer
             string input = Console.ReadLine();
             if (input == "1" || input == "Heads")
             {
-                Console.Write("Congratulations, it's heads! You get the ball first!");
+                Console.Write("Congratulations, it's Heads! You get the ball first!");
             }
             else if (input == "2" || input == "Tails")
             {
-                Console.Write("Congratulations, it's tails! You get the ball first!");
+                Console.Write("Congratulations, it's Tails! You get the ball first!");
             }
             else
             {
@@ -518,7 +518,7 @@ namespace FootballManager.GamePlayer
             while (plays < maxPlays)
             {
 
-                Console.WriteLine("Player 2, choose what kind of play you want!\n" + "1. Pass\n" + "2. Run\n");
+                Console.WriteLine("Player 2, choose what kind of play you want?\n" + "1. Pass\n" + "2. Run\n");
 
                 string playerTwoSelection = Console.ReadLine();
                 int currentPlayYards = 0;
@@ -616,33 +616,33 @@ namespace FootballManager.GamePlayer
 
                 if (GetWhoIsCatchingThePass() <= 5)
                 {
-                    Console.WriteLine($"{RB2YardRandomizer()} yard pass to RB {rb2Dictionary[nameKey]}");
+                    Console.WriteLine($"{RB2YardRandomizer()} yard pass to RB {rb2Dictionary[nameKey]}.");
                     return RB2YardRandomizer();
                 }
                 else if (GetWhoIsCatchingThePass() <= 15)
                 {
-                    Console.WriteLine($"{RB1YardRandomizer()} yard pass to RB {rb1Dictionary[nameKey]}");
+                    Console.WriteLine($"{RB1YardRandomizer()} yard pass to RB {rb1Dictionary[nameKey]}.");
                     return RB1YardRandomizer();
                 }
                 else if (GetWhoIsCatchingThePass() <= 35)
                 {
-                    Console.WriteLine($"{TEYardRandomizer()} yard pass to TE {teDictionary[nameKey]}");
+                    Console.WriteLine($"{TEYardRandomizer()} yard pass to TE {teDictionary[nameKey]}.");
                     return TEYardRandomizer();
                 }
                 else if (GetWhoIsCatchingThePass() <= 65)
                 {
-                    Console.WriteLine($"{WR2YardRandomizer()} yard pass to WR {wr2Dictionary[nameKey]}");
+                    Console.WriteLine($"{WR2YardRandomizer()} yard pass to WR {wr2Dictionary[nameKey]}.");
                     return WR2YardRandomizer();
                 }
                 else
                 {
-                    Console.WriteLine($"{WR1YardRandomizer()} yard pass to WR {wr1Dictionary[nameKey]}");
+                    Console.WriteLine($"{WR1YardRandomizer()} yard pass to WR {wr1Dictionary[nameKey]}.");
                     return WR1YardRandomizer();
                 }
             }
             else
             {
-                Console.WriteLine($"QB {qbDictionary[nameKey]} throws an incomplete pass");
+                Console.WriteLine($"QB {qbDictionary[nameKey]} throws an incomplete pass!");
                 return 0;
             }
         }
