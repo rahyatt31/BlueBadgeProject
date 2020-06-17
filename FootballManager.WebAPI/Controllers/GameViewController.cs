@@ -61,12 +61,13 @@ namespace FootballManager.WebAPI.Controllers
 
         //Delete
         [HttpGet]
-        public ActionResult Delete()
-        {
-            return View();
-        }
-        [HttpPost]
         public ActionResult Delete(int id)
+        {
+            GameService gameService = new GameService();
+            return View(gameService.GetGameByID(id));
+        }
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteGame(int id)
         {
             if (this.ModelState.IsValid)
             {

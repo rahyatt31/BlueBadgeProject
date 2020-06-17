@@ -64,6 +64,7 @@ namespace FootballManager.Services
                                 {
                                     PlayerStatsID = e.PlayerStatsID,
                                     PlayerID = e.PlayerID,
+                                    PlayerName = e.Player.PlayerFirstName + " " + e.Player.PlayerLastName,
                                     PassingYards = e.PassingYards,
                                     PassingTouchdowns = e.PassingTouchdowns,
                                     InterceptionThrown = e.InterceptionThrown,

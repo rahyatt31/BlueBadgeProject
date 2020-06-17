@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -9,27 +10,27 @@ namespace FootballManager.Models.PlayerStats
 {
     public class CreatePlayerStats
     {
+        [DisplayName("Player Stats ID")]
         public int PlayerStatsID { get; set; }
-
-        [Required]
+        [Required, DisplayName("Player ID")]
         public int PlayerID { get; set; }
-        [Required]
+        [Required, DisplayName("Passing Yards")]
         public int PassingYards { get; set; }
-        [Required]
+        [Required, DisplayName("Passing Touchdowns")]
         public int PassingTouchdowns { get; set; }
-        [Required]
+        [Required, DisplayName("Interceptions Thrown")]
         public int InterceptionThrown { get; set; }
-        [Required]
+        [Required, DisplayName("Rushing Yards")]
         public int RushingYards { get; set; }
-        [Required]
+        [Required, DisplayName("Rushing Attempts")]
         public int RushingAttempts { get; set; }
-        [Required]
+        [Required, DisplayName("Rushing Touchdowns")]
         public int RushingTouchDowns { get; set; }
-        [Required]
+        [Required, DisplayName("Receiving Yards")]
         public int ReceivingYards { get; set; }
         [Required]
         public int Catches { get; set; }
-        [Required]
+        [Required, DisplayName("Receiving Touchdowns")]
         public int ReceivingTouchDowns { get; set; }
         [Required]
         public int Fumbles { get; set; }
@@ -39,15 +40,15 @@ namespace FootballManager.Models.PlayerStats
         public double Sacks { get; set; }
         [Required]
         public int Interceptions { get; set; }
-        [Required]
+        [Required, DisplayName("Forced Fumbles")]
         public int ForcedFumbles { get; set; }
-        [Required]
+        [Required, DisplayName("Fumble Recovery")]
         public int FumbleRecovery { get; set; }
         [Required]
         public int Safety { get; set; }
-        [Required]
+        [Required, DisplayName("Blocked Kicks")]
         public int BlockedKick { get; set; }
-        [Required]
+        [Required, DisplayName("Return Touchdowns")]
         public int ReturnTouchDown { get; set; }
     }
 }
