@@ -13,8 +13,6 @@ program that has introduced us to a lot of new concepts such as RESTful to ensur
 
 ## Getting Started
 
-Our project is located @ FinalGitHubLink and @ FinalCommentedGitHubLink
-One version of the project has been commented. The other version is the same but without comments. 
 
 There are two ways to obtain the code. You can download the project as a zip file or clone the repository. If you 
 choose to download the zip file you can then expand it in your choosen location. The prefered method of obtaining
@@ -24,11 +22,10 @@ the project you can either double click on the solution file in the main directo
 
 
    Once you have the project open there are two aspects to this project. There is an API which accessible using the Postman
-utility that has been linked above. Through this API you can view, delete, edit, and create players. Each player has a list
-of realistic stats. Each player is also assigned to a team which is also completely customizable. 
+utility or through the launch page in your browser. Through this API you can view, delete, edit, and create players. Each player has a list
+of realistic stats. Each player is also assigned to a team which is completely customizable. 
 
-   These teams are then accessible in the console aspect of our application. You are able to play a simulated real game between
-the teams using real stats. 
+   The console application is a proof of concept that mirrors our api Player/Team structure and allows you to create a fantasy matchup between the teams of your choice.  
 
 
 ### API Endpoints
@@ -62,36 +59,27 @@ Safety BlockedKick
 ReturnTouchDown
 ```
 
+### Web App 
+  Our API is accessible directly through the web browser. When the program launches our custom splash screen should appear in the browser which allows you to View, Create, Edit and Delete your Players, Player Stats, Teams, and Games. Everything you have done in postman is accessible through this website - which provides an easy way to interface with our API without any extra software.  
+
 
 
 ### Console App
 
-In order to run the Console app you will need to right click on the GamePlayer in the solution explorer and click on 
-Select Focus.
-
-
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
+When our application starts you will also see a console window open and the Football Manager app load up. This application gives you the opportunity to create a fantasy matchup between the Colts and Jaguars. It maintains it's own player and team data however it is  Each team will get 4 series of plays to try to score the most points and win the game. Play outcomes are random, however the skill of the players influences the liklihood of success.  
 
 ## License
 
 This is a student project. Take it - change it - make it yours! 
 
-## Acknowledgments
+## Special Thanks!
 
 * Brantley Heath
 * Robbie Hyatt
 * Everyone @ Eleven Fifty Academy 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
-ReadMe References:
+
+Sources:
 
 DateTime Properties
 https://stackoverflow.com/questions/8043816/using-datetime-properties-in-code-first-entity-framework-and-sql-server
@@ -121,4 +109,3 @@ Roslyn Error Fix
 https://stackoverflow.com/questions/32780315/could-not-find-a-part-of-the-path-bin-roslyn-csc-exe
 
 Watch LINQ videos
-
