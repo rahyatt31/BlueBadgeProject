@@ -108,4 +108,4 @@ https://docs.microsoft.com/en-us/aspnet/web-api/overview/getting-started-with-as
 Roslyn Error Fix
 https://stackoverflow.com/questions/32780315/could-not-find-a-part-of-the-path-bin-roslyn-csc-exe
 
-Watch LINQ videos
+
