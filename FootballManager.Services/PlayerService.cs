@@ -25,7 +25,6 @@ namespace FootballManagerServices
         {
             var entity = new Player()
             {
-                //PlayerID = model.PlayerID,
                 TeamID = model.TeamID,
                 PlayerFirstName = model.PlayerFirstName,
                 PlayerLastName = model.PlayerLastName,

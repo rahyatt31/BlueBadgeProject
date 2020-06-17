@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Data.Entity;
@@ -13,25 +14,25 @@ namespace FootballManager.Models.Player
     public class CreatePlayer
     {
         //public int PlayerID { get; set; } //not needed in model. Gets generated in the database
-        [Required]
+        [Required, DisplayName("Team ID")]
         public int TeamID { get; set; }
 
-        [Required]
+        [Required, DisplayName("First Name")]
         public string PlayerFirstName { get; set; }
-        [Required]
+        [Required, DisplayName("Last Name")]
         public string PlayerLastName { get; set; }
 
-        [MaxLength(2, ErrorMessage = "Please enter the abbriviation with consisting of only 2 characters. (QB, RB, WR, TE, OL, DL, LB, CB, FS, SS)")]
+        [MaxLength(2, ErrorMessage = "Please enter the abbriviation with consisting of only 2 characters. (QB, RB, WR, TE, OL, DL, LB, CB, FS, SS)"), DisplayName("Position")]
         //Stretch Goal -- Make Enum
         public string PlayerPosition { get; set; }
 
-        [Required]
+        [Required, DisplayName("Jersey Number")]
         [Range(0,99, ErrorMessage = "Jersey number can only be 2 digits and has to be between 0 and 99.")]
         public int PlayerJerseyNumber { get; set; }
 
-        [Required]
+        [Required, DisplayName("Height")]
         public double PlayerHeightByInches { get; set; }
-        [Required]
+        [Required, DisplayName("Weight")]
         public double PlayerWeightByPounds { get; set; }
     }
 }

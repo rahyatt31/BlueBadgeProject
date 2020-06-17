@@ -1,4 +1,5 @@
-﻿using FootballManager.Models.Team;
+﻿using FootballManager.Data;
+using FootballManager.Models.Team;
 using FootballManagerServices;
 using System;
 using System.Collections.Generic;
@@ -61,12 +62,13 @@ namespace FootballManager.WebAPI.Controllers
 
         //Delete
         [HttpGet]
-        public ActionResult Delete()
-        {
-            return View();
-        }
-        [HttpPost]
         public ActionResult Delete(int id)
+        {
+            TeamService teamService = new TeamService();
+            return View(teamService.GetTeamByID(id));
+        }
+        [HttpPost, ActionName("Delete")]
+        public ActionResult DeleteTeam(int id)
         {
             if (this.ModelState.IsValid)
             {

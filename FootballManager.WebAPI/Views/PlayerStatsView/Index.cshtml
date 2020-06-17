@@ -18,6 +18,9 @@
             @Html.DisplayNameFor(model => model.PlayerID)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.PlayerName)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.PassingYards)
         </th>
         <th>
@@ -75,73 +78,75 @@
     </tr>
 
 @foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.PlayerStatsID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PlayerID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PassingYards)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.PassingTouchdowns)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.InterceptionThrown)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RushingYards)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RushingAttempts)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.RushingTouchDowns)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReceivingYards)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Catches)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReceivingTouchDowns)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Fumbles)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Tackles)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Sacks)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Interceptions)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ForcedFumbles)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.FumbleRecovery)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Safety)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.BlockedKick)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ReturnTouchDown)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-        </td>
-    </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.PlayerStatsID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PlayerID)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PlayerName)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PassingYards)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.PassingTouchdowns)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.InterceptionThrown)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.RushingYards)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.RushingAttempts)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.RushingTouchDowns)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ReceivingYards)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Catches)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ReceivingTouchDowns)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Fumbles)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Tackles)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Sacks)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Interceptions)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ForcedFumbles)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.FumbleRecovery)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.Safety)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.BlockedKick)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.ReturnTouchDown)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+        @Html.ActionLink("Delete", "Delete", new { id=item.PlayerStatsID })
+    </td>
+</tr>
 }
 
 </table>

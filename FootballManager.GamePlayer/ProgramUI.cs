@@ -39,28 +39,32 @@ namespace FootballManager.GamePlayer
         //}
 
         bool isGameActive = true;
-        int playerOneStartingScore = 0;
-        int playerTwoStartingScore = 0;
-        int plays = 0;
-        int maxPlays = 4;
+        int playerOneScore = 0;
+        int playerTwoScore = 0;
+
         int possessions = 0;
         int maxPossessions = 4;
+        string playerOneChoice;
+        string playerTwoChoice;
 
         static string nameKey = "Name";
         static string positionKey = "Position";
         static string ratingKey = "Rating";
 
-        Dictionary<string, int> computerTeamSelection = new Dictionary<string, int>
-        {
-            { "Colts" , 1 },                                                      // Name of team, and the average off/def "Power"
-            { "Jaguars" , 2 },
-            { "Texans" , 3 },
-            { "Titans" , 4 },
-            { "Buccaneers" , 5 },
-            { "Falcons" , 6 },
-            { "Panthers" , 7 },
-            { "Saints" , 8 }
-        };
+        static string ReturnToTheMainMenu = "Return to the Main Menu";
+        static string PleasePressAnyKeyToContinue = "\n\n[ Please press any key to continue ]";
+
+        //Dictionary<string, int> computerTeamSelection = new Dictionary<string, int>
+        //{
+        //    { "Colts" , 1 },                                                      
+        //    { "Jaguars" , 2 },
+        //    { "Texans" , 3 },
+        //    { "Titans" , 4 },
+        //    { "Buccaneers" , 5 },
+        //    { "Falcons" , 6 },
+        //    { "Panthers" , 7 },
+        //    { "Saints" , 8 }
+        //};
 
         Dictionary<string, int> coinToss = new Dictionary<string, int>
         {
@@ -163,7 +167,8 @@ namespace FootballManager.GamePlayer
                 {nameKey, "D.J. Chark Jr."},
                 {positionKey, Position.WR1},
                 {ratingKey, 88}
-            },new Dictionary<string, dynamic>
+            },
+            new Dictionary<string, dynamic>
             {
                 {nameKey, "Dede Westbrook"},
                 {positionKey, Position.WR2},
@@ -180,27 +185,32 @@ namespace FootballManager.GamePlayer
                 {nameKey, "Josh Allen"},
                 {positionKey, Position.DL},
                 {ratingKey, 90}
-            },new Dictionary<string, dynamic>
+            },
+            new Dictionary<string, dynamic>
             {
                 {nameKey, "Yannick Ngakoue"},
                 {positionKey, Position.DL},
                 {ratingKey, 94}
-            },new Dictionary<string, dynamic>
+            },
+            new Dictionary<string, dynamic>
             {
                 {nameKey, "Myles Jack"},
                 {positionKey, Position.LB},
                 {ratingKey, 93}
-            },new Dictionary<string, dynamic>
+            },
+            new Dictionary<string, dynamic>
             {
                 {nameKey, "Joe Schobert"},
                 {positionKey, Position.LB},
                 {ratingKey, 79}
-            },new Dictionary<string, dynamic>
+            },
+            new Dictionary<string, dynamic>
             {
                 {nameKey, "CJ Henderson"},
                 {positionKey, Position.DB},
                 {ratingKey, 80}
-            },new Dictionary<string, dynamic>
+            },
+            new Dictionary<string, dynamic>
             {
                 {nameKey, "Ronnie harrison"},
                 {positionKey, Position.DB},
@@ -208,30 +218,12 @@ namespace FootballManager.GamePlayer
             },
         };
 
-        Dictionary<string, int> coltsPlayerOverallRating = new Dictionary<string, int>
-        {
-            {"Philip Rivers"    , 84},
-            {"Marlon Mack"      , 85},
-            {"Nyheim Hines"     , 80},
-            {"T.Y. Hilton"      , 86},
-            {"Zach Pascal"      , 77},
-            {"Jack Doyle"       , 81},
-
-            {"DeForest Buckner" , 96},
-            {"Justin Houston"   , 88},
-            {"Darius Leonard"   , 96},
-            {"Anthony Walker"   , 84},
-            {"Kenny Moore II"   , 82},
-            {"Malik Hooker"     , 83}
-        };
-
         public void Run()
         {
-            string titlescreen = System.IO.File.ReadAllText(@"C:\Users\13172\Desktop\BlueBadgeProject\FootballManager.GamePlayer\Football Manager Start Screen.txt");
+            string titlescreen = System.IO.File.ReadAllText(@"..\Football Manager Start Screen.txt");
             Console.WriteLine(titlescreen);
             Console.ReadKey();
             RunMenu();
-            TeamSelection();
         }
 
         public void RunMenu()
@@ -270,26 +262,28 @@ namespace FootballManager.GamePlayer
         public void TeamSelection()
         {
             Console.Clear();
-            Console.WriteLine("Welcome to Football Manager");
+            Console.WriteLine("Welcome to Football Manager!" + PleasePressAnyKeyToContinue);
             Console.ReadKey();
-            Console.Clear();
-            Console.WriteLine("Player One, please select your Team!");
-            string userChoice = GetUsersChoiceForTeam();
+
             Team selectedTeam = Team.Colts;
             Team selectedOpponentTeam = Team.Jaguars;
 
-            if (userChoice == "9")
+            string prompt = "Player One, please select your Team!";
+            string[] teamNamesArray = Enum.GetNames(typeof(Team));
+
+            (bool returnToMainMenu, int userChoice) = PromptUserToMakeNumericSelection(prompt, teamNamesArray, ReturnToTheMainMenu);
+            if (returnToMainMenu)
             {
                 RunMenu();
             }
             else
             {
-                selectedTeam = (Team)Convert.ToInt32(userChoice);
+                selectedTeam = (Team)userChoice;
                 DisplaySelectedTeam(selectedTeam);
             }
-            Console.ReadLine();
 
             string opponentChoice = OpponentChoice();
+
             if (opponentChoice == "9")
             {
                 RunMenu();
@@ -299,12 +293,13 @@ namespace FootballManager.GamePlayer
                 selectedOpponentTeam = (Team)Convert.ToInt32(opponentChoice);
                 DisplaySelectedTeam(selectedOpponentTeam);
             }
-            Console.ReadLine();
-            Console.WriteLine($"Todays game will be played between {selectedTeam} and {selectedOpponentTeam}");
-            Console.ReadLine();
-            // Having a reselect team option
+
+            Console.WriteLine($"\nTodays game will be played between the {selectedTeam} and the {selectedOpponentTeam}");
+            PressAnyKeyToContinue();
+
             Console.WriteLine("Are you ready to begin?");
             Console.WriteLine("\n1. Yes!\n" + "2. No, return to the main menu!\n");
+
             string areYouReadyToPlay = Console.ReadLine();
 
             switch (areYouReadyToPlay)
@@ -318,6 +313,7 @@ namespace FootballManager.GamePlayer
                 default:
                     break;
             }
+            InGamePlay(selectedTeam, selectedOpponentTeam);
         }
 
         public string OpponentChoice()
@@ -325,55 +321,65 @@ namespace FootballManager.GamePlayer
             Console.Clear();
             Console.WriteLine("Would you like to select your opponent or have it be selected for you?");
             Console.WriteLine("\n1. Select your opponent!\n" + "2. Select to have a random opponent!\n");
+
             string doYouWantToPickYourOpponent = Console.ReadLine();
 
             switch (doYouWantToPickYourOpponent)
             {
                 case "1":
-                    string playerTwoSelection = OpponentChoiceOne();
+                    string playerTwoSelection = OpponentUserChoice();
                     return playerTwoSelection;
                 case "2":
-                    string playerTwoRandomSelection = OpponenetChoiceTwo();
+                    string playerTwoRandomSelection = OpponentRandomChoice();
                     return playerTwoRandomSelection;
                 default:
                     return "9";
             }
         }
 
-        public string OpponentChoiceOne()
+        public string OpponentUserChoice()
         {
-            Console.Clear();
-            Console.WriteLine("Player Two, please select your Team!");
+            string prompt = "Player Two, please select your Team!";
+            string[] teamNamesArray = Enum.GetNames(typeof(Team));
 
-            string opponentChoice = GetUsersChoiceForTeam();
-            return opponentChoice;
+            (bool returnToMainMenu, int userChoice) = PromptUserToMakeNumericSelection(prompt, teamNamesArray, ReturnToTheMainMenu);
+            if (returnToMainMenu)
+            {
+                return Convert.ToString(teamNamesArray.Count() + 1); // hack to send back last item number string which is number of teams plus one
+            }
+            else
+            {
+                return Convert.ToString(userChoice); // hack to send back user choice as string
+            }
         }
 
-        private string OpponenetChoiceTwo()
+        private string OpponentRandomChoice()
         {
             Console.Clear();
+
             string randomTeamSelection = Convert.ToString((int)ComputerTeamSelection());
+
             Console.WriteLine($"Your opponent will be {randomTeamSelection}!");
             Console.WriteLine($"Here is the starting lineup for the {randomTeamSelection}!");
+
             return randomTeamSelection;
         }
 
         public void ViewTeams()
         {
-            Console.Clear();
+            string prompt = "Pick a team to view";
+            string[] teamNamesArray = Enum.GetNames(typeof(Team));
 
-            string viewTeam = GetUsersChoiceForTeam();
-            if (viewTeam == "9")
+            (bool returnToMainMenu, int userChoice) = PromptUserToMakeNumericSelection(prompt, teamNamesArray, ReturnToTheMainMenu);
+            if (returnToMainMenu)
             {
                 RunMenu();
             }
             else
             {
-                Team selectedTeam = (Team)Convert.ToInt32(viewTeam);
+                Team selectedTeam = (Team)userChoice;
                 DisplaySelectedTeam(selectedTeam);
             }
-            Console.ReadLine();
-            Console.ReadKey();
 
             ViewTeams();
 
@@ -382,166 +388,368 @@ namespace FootballManager.GamePlayer
 
         public void CoinToss()
         {
-            string coinTossFlip = CoinTossResult(coinToss);
-            // Just a 50/50 Coin Toss to determine who gets the ball first
+            //string coinTossFlip = CoinTossResult(coinToss); // Doesn't work yet, coin toss doesn't attach to a player
+
             Console.Clear();
             Console.WriteLine("It's time to do the coin toss, would you like Heads or Tails?");
             Console.WriteLine("\n1. Heads\n" + "2. Tails\n");
-            Console.ReadLine();
-            // User Selects Heads or Tails
-            Console.WriteLine(coinTossFlip);
+            string input = Console.ReadLine();
+            if (input == "1" || input == "Heads")
+            {
+                Console.Write("Congratulations, it's heads! You get the ball first!");
+            }
+            else if (input == "2" || input == "Tails")
+            {
+                Console.Write("Congratulations, it's tails! You get the ball first!");
+            }
+            else
+            {
+                Console.WriteLine("Not a correct input. Press 'enter' to continue.");
+                Console.ReadLine();
+                CoinToss();
+            }
+            //Console.WriteLine(coinTossFlip);
             Console.ReadKey();
-            // Console.Write($"Congratulations + {winner}, you get the ball first!");
-            // InGamePlay();
         }
 
-        public void InGamePlay()
+        private void InGamePlay(Team homeTeam, Team awayTeam)
         {
             Console.Clear();
-            //Console.WriteLine($"Since {P1} won the coin toss they will go first!");
 
-            //PlayerOneTurn
-            //Pass/Run
-            //Execute 4 plays = Possession
-            //PlayerTwoTurn
-            //Pass/Run
-            //ShowScore
+            while (possessions < maxPossessions)
+            {
+                playerOneChoice = PlayerOneSelection(homeTeam, awayTeam);
+                playerTwoChoice = PlayerTwoSelection(awayTeam, homeTeam);
 
-            //PlayerOneTurn
-            //PlayerTwoTurn
-            //ShowScore
+                Console.WriteLine($"The Score is {playerOneScore} - {playerTwoScore}");
+                Console.ReadLine();
 
-            //PlayerOneTurn
-            //PlayerTwoTurn
-            //ShowScore
+                possessions++;
+            }
 
-            //PlayerOneTurn
-            //PlayerTwoTurn
-            //ShowScore
+            ScoreTable();
 
-            //Compare Score, bigger score wins
-
-            // Team gets 4 plays to try and get as many yards as possible ( 1 play equals a quarter, after every quarter, show the score)
-            // Before every turn, the user picks whether or not to PASS or RUN
-            // If PASS include QB passing to RB, WR, or TE
-            // Randomly Select Player to pass to, (the better the player, the higher chance for more yards)
             // Maybe include a small % for QB run here
-            // If RUN include RB1 80% RB2 20%
             // If team gets 75 or more than touchdown 6points, then choice to go for 1 or 2
             // 95% for 1 point 50% for 2 points
-            // Screen congratulating on scoring or screen showing missed field goal
-            // Next team goes
-            // Both teams get 3 possessions (when testing, more for when we are done)
             // Could include a small % based on Defense Stats to include a turnover during opponents possession
             // For example 5% chance of a sack = loss of play or even loss of yards on play
             // Interception or Fumble equals possession ending
         }
 
-        //private void PlayerOneTurn(string user, string aI)
-        //{
-        //    ScoreTable(playerScore);                            
-
-        //    if (possessions != maxPossessions)                                        
-        //    {                                  
-        //        if (plays != maxPlays)
-        //        {
-        //            // if run
-        //                // add yards
-        //            // else if pass complete
-        //                // add yards
-        //            // else if pass incomplete
-        //                // add 0 yards
-        //            // else possession ends (turnover)
-        //        }
-        //    }
-        //}
-
-        public string PlayerOneSelection()
+        private string PlayerOneSelection(Team activeTeam, Team inactiveTeam)
         {
             Console.Clear();
 
-            string choice;
-            Console.WriteLine("Choose what kind of play do you want!\n" + "1. Pass\n" + "2. Run\n");
+            int plays = 0;
+            int maxPlays = 4;
+            int totalYards = 0;
+            int nflFieldGoalYards = 0;
 
-            string userSelection = Console.ReadLine();
-
-            switch (userSelection)
+            while (plays < maxPlays)
             {
-                case "1":
-                    choice = "Pass";
-                    return choice;
-                case "2":
-                    choice = "Run";
-                    return choice;
-                default:
-                    PlayerOneSelection();
-                    break;
+
+                Console.WriteLine("Player 1, choose what kind of play you want?\n" + "1. Pass\n" + "2. Run\n");
+
+                string playerOneSelection = Console.ReadLine();
+                int currentPlayYards = 0;
+
+                switch (playerOneSelection)
+                {
+                    case "1":
+                        currentPlayYards = GetInGamePassYards(activeTeam);
+                        break;
+                    case "2":
+                        currentPlayYards = GetInGameRunYards(activeTeam);
+                        break;
+                    default:
+                        PlayerOneSelection(activeTeam, inactiveTeam); // todo: maybe fix... should this really call self again?
+                        break;
+                }
+
+                plays++;
+                totalYards += currentPlayYards;
+
+                Console.ReadLine();
+                Console.WriteLine($"\nPlayer One has gained {currentPlayYards} for a total of {totalYards} yards on this drive!");
+
+                nflFieldGoalYards = 92 - totalYards;
+
+                Console.ReadLine();
+                Console.Clear();
+            }
+
+            if (totalYards < 30)
+            {
+                Console.WriteLine("Player One turned the ball over on downs!");
+                Console.ReadLine();
+            }
+            else if (totalYards < 75)
+            {
+                Console.WriteLine($"Player One is going to try a {nflFieldGoalYards} yard field Goal!");
+                Console.ReadLine();
+
+                int fieldGoal = GetFieldGoalDistanceRandomizer(activeTeam, nflFieldGoalYards);
+
+                Console.WriteLine(fieldGoal);
+                Console.ReadLine();
+
+                playerOneScore += fieldGoal;
+            }
+            else
+            {
+                Console.WriteLine("Player One scored a TOUCHDOWN!");
+                Console.ReadLine();
+
+                playerOneScore += 7;
             }
             return null;
         }
 
-        public void ColtsPassing()
+        private string PlayerTwoSelection(Team activeTeam, Team inactiveTeam)
         {
-            Dictionary<string, dynamic> qbDictionary = GetPlayerDictionaryByPosition(Position.QB);
-            Dictionary<string, dynamic> rb1Dictionary = GetPlayerDictionaryByPosition(Position.RB1);
-            Dictionary<string, dynamic> rb2Dictionary = GetPlayerDictionaryByPosition(Position.RB2);
-            Dictionary<string, dynamic> wr1Dictionary = GetPlayerDictionaryByPosition(Position.WR1);
-            Dictionary<string, dynamic> wr2Dictionary = GetPlayerDictionaryByPosition(Position.WR2);
-            Dictionary<string, dynamic> teDictionary = GetPlayerDictionaryByPosition(Position.TE);
+            Console.Clear();
 
-            // QB Completes 80% insert passing randomizer
-            if (PassingCompletionRandomizer() <= 80)
+            int plays = 0;
+            int maxPlays = 4;
+            int totalYards = 0;
+            int nflFieldGoalYards = 0;
+
+            while (plays < maxPlays)
             {
-                Console.WriteLine($"QB {qbDictionary[nameKey]} completes a...");
-                // who does he pass to?  WR1 35%, WR2 30%, TE 20% RB1 10%, RB2 5%
 
-                if (GetWhoIsCatchingThePass() <= 5)
+                Console.WriteLine("Player 2, choose what kind of play you want!\n" + "1. Pass\n" + "2. Run\n");
+
+                string playerTwoSelection = Console.ReadLine();
+                int currentPlayYards = 0;
+
+                switch (playerTwoSelection)
                 {
-                    Console.Write($"_____ yard pass to RB {rb2Dictionary[nameKey]}");
-                    // RB2 Catches the ball for 1-4
+                    case "1":
+                        currentPlayYards = GetInGamePassYards(activeTeam);
+                        break;
+                    case "2":
+                        currentPlayYards = GetInGameRunYards(activeTeam);
+                        break;
+                    default:
+                        PlayerTwoSelection(activeTeam, inactiveTeam); // todo: should this call itself ???
+                        break;
                 }
-                else if (GetWhoIsCatchingThePass() <= 15)
+
+                plays++;
+                totalYards += currentPlayYards;
+
+                Console.ReadLine();
+                Console.WriteLine($"Player Two has gained {currentPlayYards} for a total of {totalYards} yards on this drive!");
+
+                nflFieldGoalYards = 92 - totalYards;
+
+                Console.ReadLine();
+                Console.Clear();
+            }
+            if (totalYards < 30)
+            {
+                Console.WriteLine("Player Two turned the ball over on downs!");
+                Console.ReadLine();
+            }
+            else if (totalYards < 75)
+            {
+                Console.WriteLine($"Player Two is going to try a {nflFieldGoalYards} yard field Goal!");
+                Console.ReadLine();
+
+                int fieldGoal = GetFieldGoalDistanceRandomizer(activeTeam, nflFieldGoalYards);
+
+                Console.WriteLine(fieldGoal);
+                Console.ReadLine();
+
+                playerTwoScore += fieldGoal;
+            }
+            else
+            {
+                Console.WriteLine("Player Two scored a TOUCHDOWN!");
+                Console.ReadLine();
+
+                playerTwoScore += 7;
+            }
+            return null;
+        }
+
+        private void ScoreTable()
+        {
+            if (possessions == maxPossessions)
+            {
+                if (playerOneScore > playerTwoScore)
                 {
-                    Console.Write($"______ yard pass to RB {rb1Dictionary[nameKey]}");
-                    // RB1 Catches the ball for 1-7
-                }
-                else if (GetWhoIsCatchingThePass() <= 35)
-                {
-                    Console.Write($"______ yard pass to TE {teDictionary[nameKey]}");
-                    // TE Catches the ball for 5-12
-                }
-                else if (GetWhoIsCatchingThePass() <= 65)
-                {
-                    Console.Write($"{WR2YardRandomizer()} yard pass to WR {wr2Dictionary[nameKey]}");
-                    // WR2 Catches the ball for 7-14
+                    string playerWin = "Player One Wins";
+
+                    Console.WriteLine(playerWin.PadLeft(59));
+                    Console.ReadKey();
+
+                    isGameActive = false;                                   // Stops the game from continuing
+                    Environment.Exit(0);                                    // This line of code closes the console application and avoids crash
                 }
                 else
                 {
-                    Console.Write($"{WR1YardRandomizer()} yard pass to WR {wr1Dictionary[nameKey]}");
-                    // WR1 Catches the ball for 9-20
+                    string playerLose = "Player Two Wins";
+
+                    Console.WriteLine(playerLose.PadLeft(59));
+                    Console.ReadKey();
+
+                    isGameActive = false;                                   // Stops the game from continuing
+                    Environment.Exit(0);                                    // This line of code closes the console application and avoids crash
+                }
+            }
+        }
+
+        private int GetInGamePassYards(Team team)
+        {
+            Dictionary<string, dynamic> qbDictionary = GetPlayerDictionaryByPosition(Position.QB, team);
+            Dictionary<string, dynamic> rb1Dictionary = GetPlayerDictionaryByPosition(Position.RB1, team);
+            Dictionary<string, dynamic> rb2Dictionary = GetPlayerDictionaryByPosition(Position.RB2, team);
+            Dictionary<string, dynamic> wr1Dictionary = GetPlayerDictionaryByPosition(Position.WR1, team);
+            Dictionary<string, dynamic> wr2Dictionary = GetPlayerDictionaryByPosition(Position.WR2, team);
+            Dictionary<string, dynamic> teDictionary = GetPlayerDictionaryByPosition(Position.TE, team);
+
+            if (GetIfThePassIsCompleteRandomizer() <= 80)
+            {
+                Console.Write($"QB {qbDictionary[nameKey]} completes a ");
+
+                if (GetWhoIsCatchingThePass() <= 5)
+                {
+                    Console.WriteLine($"{RB2YardRandomizer()} yard pass to RB {rb2Dictionary[nameKey]}");
+                    return RB2YardRandomizer();
+                }
+                else if (GetWhoIsCatchingThePass() <= 15)
+                {
+                    Console.WriteLine($"{RB1YardRandomizer()} yard pass to RB {rb1Dictionary[nameKey]}");
+                    return RB1YardRandomizer();
+                }
+                else if (GetWhoIsCatchingThePass() <= 35)
+                {
+                    Console.WriteLine($"{TEYardRandomizer()} yard pass to TE {teDictionary[nameKey]}");
+                    return TEYardRandomizer();
+                }
+                else if (GetWhoIsCatchingThePass() <= 65)
+                {
+                    Console.WriteLine($"{WR2YardRandomizer()} yard pass to WR {wr2Dictionary[nameKey]}");
+                    return WR2YardRandomizer();
+                }
+                else
+                {
+                    Console.WriteLine($"{WR1YardRandomizer()} yard pass to WR {wr1Dictionary[nameKey]}");
+                    return WR1YardRandomizer();
                 }
             }
             else
             {
                 Console.WriteLine($"QB {qbDictionary[nameKey]} throws an incomplete pass");
-                // Pass is incomplete add 0 yards
+                return 0;
             }
         }
 
-        public int ColtsRunning()
+        private int GetInGameRunYards(Team team)
         {
-            // Who runs? 80% RB1, 20% RB2
+            Dictionary<string, dynamic> rb1Dictionary = GetPlayerDictionaryByPosition(Position.RB1, team);
+            Dictionary<string, dynamic> rb2Dictionary = GetPlayerDictionaryByPosition(Position.RB2, team);
+
             if (RunningRandomizer() <= 20)
             {
                 int rb2Yards = RB2YardRandomizer();
+                Console.WriteLine($"{rb2Dictionary[nameKey]} ran the ball for {rb2Yards} yards!");
                 return rb2Yards;
             }
             else
             {
                 int rb1Yards = RB1YardRandomizer();
+                Console.WriteLine($"{rb1Dictionary[nameKey]} ran the ball for {rb1Yards} yards!");
                 return rb1Yards;
             }
         }
+
+        private int GetFieldGoalDistanceRandomizer(Team team, int nflFieldGoalYards)
+        {
+            if (nflFieldGoalYards <= 34)
+            {
+                if (FieldGoalRandomizer() <= 30)
+                {
+                    Console.WriteLine("The Field Goal was GOOD!");
+                    return 3;
+                }
+                else
+                {
+                    Console.WriteLine("The Field Goal was NOT GOOD!");
+                    return 0;
+                }
+            }
+            else if (nflFieldGoalYards <= 39)
+            {
+                if (FieldGoalRandomizer() <= 50)
+                {
+                    Console.WriteLine("The Field Goal was GOOD!");
+                    return 3;
+                }
+                else
+                {
+                    Console.WriteLine("The Field Goal was NOT GOOD!");
+                    return 0;
+                }
+            }
+            else if (nflFieldGoalYards <= 44)
+            {
+                if (FieldGoalRandomizer() <= 60)
+                {
+                    Console.WriteLine("The Field Goal was GOOD!");
+                    return 3;
+                }
+                else
+                {
+                    Console.WriteLine("The Field Goal was NOT GOOD!");
+                    return 0;
+                }
+            }
+            else if (nflFieldGoalYards <= 54)
+            {
+                if (FieldGoalRandomizer() <= 75)
+                {
+                    Console.WriteLine("The Field Goal was GOOD!");
+                    return 3;
+                }
+                else
+                {
+                    Console.WriteLine("The Field Goal was NOT GOOD!");
+                    return 0;
+                }
+            }
+            else if (nflFieldGoalYards <= 64)
+            {
+                if (FieldGoalRandomizer() <= 85)
+                {
+                    Console.WriteLine("The Field Goal was GOOD!");
+                    return 3;
+                }
+                else
+                {
+                    Console.WriteLine("The Field Goal was NOT GOOD!");
+                    return 0;
+                }
+            }
+            else if (nflFieldGoalYards <= 74)
+            {
+                if (FieldGoalRandomizer() <= 95)
+                {
+                    Console.WriteLine("The Field Goal was GOOD!");
+                    return 3;
+                }
+                else
+                {
+                    Console.WriteLine("The Field Goal was NOT GOOD!");
+                    return 0;
+                }
+            }
+            return default;
+        }
+
+        // R A N D O M I Z E R S
 
         private int RunningRandomizer()
         {
@@ -553,33 +761,39 @@ namespace FootballManager.GamePlayer
         private int RB1YardRandomizer()
         {
             Random yards = new Random();
-            int runYards = yards.Next(0, 9);
+            int runYards = yards.Next(1, 25);
             return runYards;
         }
 
         private int RB2YardRandomizer()
         {
             Random yards = new Random();
-            int runYards = yards.Next(1, 16);
+            int runYards = yards.Next(0, 12);
             return runYards;
+        }
+
+        private int TEYardRandomizer()
+        {
+            Random yards = new Random();
+            int receivingYards = yards.Next(7, 23);
+            return receivingYards;
         }
 
         private int WR1YardRandomizer()
         {
             Random yards = new Random();
-            int receivingYards = yards.Next(9, 21);
+            int receivingYards = yards.Next(9, 31);
             return receivingYards;
         }
 
         private int WR2YardRandomizer()
         {
             Random yards = new Random();
-            int receivingYards = yards.Next(7, 15);
+            int receivingYards = yards.Next(7, 21);
             return receivingYards;
         }
 
-
-        private int PassingCompletionRandomizer()
+        private int GetIfThePassIsCompleteRandomizer()
         {
             Random yards = new Random();
             int completion = yards.Next(1, 101);
@@ -592,36 +806,6 @@ namespace FootballManager.GamePlayer
             int receiver = yards.Next(1, 101);
             return receiver;
         }
-
-
-
-        private Dictionary<string, dynamic> GetPlayerDictionaryByPosition(Position position)
-        {
-            foreach (Dictionary<string, dynamic> playerDictionary in coltsPlayerArray)
-            {
-                if (playerDictionary[positionKey] == position)
-                {
-                    return playerDictionary;
-                }
-            }
-            return null;
-        }
-
-        private string CoinTossResult(Dictionary<string, int> coinToss)
-        {
-            Console.Clear();
-            Random rand = new Random();
-            int num = rand.Next(1, 3);
-            foreach (var data in coinToss)
-            {
-                if (data.Value == num)
-                {
-                    return data.Key;
-                }
-            }
-            return null;
-        }
-
         private int FieldGoalRandomizer()
         {
             Random yards = new Random();
@@ -629,88 +813,20 @@ namespace FootballManager.GamePlayer
             return fieldGoal;
         }
 
-        private string FieldGoalPercentage() // Still need to add a +0 or +3 to score in this method
-        {
-            int yards = 0;
-            if (yards < 30)
-            {
-                //Console.WriteLine($"{Team} has turned the ball over.")
-            }
-            else if (yards <= 34)
-            {
-                if (FieldGoalRandomizer() <= 30)
-                {
-                    //Console.WriteLine($"{Team} has made a yard fieldgoal!")
-                }
-                else
-                {
-                    //Console.WriteLine($"{Team} has missed a yard fieldgoal!")
-                }
-            }
-            else if (yards <= 39)
-            {
-                if (FieldGoalRandomizer() <= 50)
-                {
-                    //Console.WriteLine($"{Team} has made a yard fieldgoal!")
-                }
-                else
-                {
-                    //Console.WriteLine($"{Team} has missed a yard fieldgoal!")
-                }
-            }
-            else if (yards <= 44)
-            {
-                if (FieldGoalRandomizer() <= 60)
-                {
-                    //Console.WriteLine($"{Team} has made a yard fieldgoal!")
-                }
-                else
-                {
-                    //Console.WriteLine($"{Team} has missed a yard fieldgoal!")
-                }
-            }
-            else if (yards <= 54)
-            {
-                if (FieldGoalRandomizer() <= 75)
-                {
-                    //Console.WriteLine($"{Team} has made a yard fieldgoal!")
-                }
-                else
-                {
-                    //Console.WriteLine($"{Team} has missed a yard fieldgoal!")
-                }
-            }
-            else if (yards <= 64)
-            {
-                if (FieldGoalRandomizer() <= 85)
-                {
-                    //Console.WriteLine($"{Team} has made a yard fieldgoal!")
-                }
-                else
-                {
-                    //Console.WriteLine($"{Team} has missed a yard fieldgoal!")
-                }
-            }
-            else if (yards <= 74)
-            {
-                if (FieldGoalRandomizer() <= 95)
-                {
-                    //Console.WriteLine($"{Team} has made a yard fieldgoal!")
-                }
-                else
-                {
-                    //Console.WriteLine($"{Team} has missed a yard fieldgoal!")
-                }
-            }
-            return null;
-
-            // If team gets 65-74 yards, then gets the opportunity for 95% 3 point field goal
-            // If team gets 55-64 yards, then gets the opportunity for 85% 3 point field goal
-            // If team gets 45-54 yards, then gets the opportunity for 75% 3 point field goal
-            // If team gets 40-44 yards, then gets the opportunity for 60% 3 point field goal
-            // If team gets 35-39 yards, then gets the opportunity for 50% 3 point field goal
-            // If team gets 30-34 yards, then gets the opportunity for 30% 3 point field goal
-        }
+        //private string CoinTossResult(Dictionary<string, int> coinToss)
+        //{
+        //    Console.Clear();
+        //    Random rand = new Random();
+        //    int num = rand.Next(1, 3);
+        //    foreach (var data in coinToss)
+        //    {
+        //        if (data.Value == num)
+        //        {
+        //            return data.Key;
+        //        }
+        //    }
+        //    return null;
+        //}
 
         private Team ComputerTeamSelection()
         {
@@ -720,141 +836,102 @@ namespace FootballManager.GamePlayer
             return num;
         }
 
-        private string DisplaySelectedTeam(Team selectedTeam)
+        private Dictionary<string, dynamic>[] GetPlayerArrayForTeam(Team team)
         {
-            Console.Clear();
-            Console.WriteLine($"You have picked the {selectedTeam}!");
-            Console.WriteLine("Here is the starting lineup for the Colts!\n");
-            foreach (Dictionary<string, dynamic> player in selectedTeam == Team.Colts ? coltsPlayerArray : jaguarsPlayerArray) // If Team.Colts use colts or jaguars
+            Dictionary<string, dynamic>[] playerArray = coltsPlayerArray;
+            switch (team)
             {
-                Console.WriteLine($"Name:{player[nameKey]}, Position:{player[positionKey]}, Rating:{player[ratingKey]}");
+                case Team.Colts:
+                    // already set above on line 814
+                    break;
+                case Team.Jaguars:
+                    playerArray = jaguarsPlayerArray;
+                    break;
+            }
+            return playerArray;
+        }
+
+        private Dictionary<string, dynamic> GetPlayerDictionaryByPosition(Position position, Team team)
+        {
+            foreach (Dictionary<string, dynamic> playerDictionary in GetPlayerArrayForTeam(team))
+            {
+                if (playerDictionary[positionKey] == position)
+                {
+                    return playerDictionary;
+                }
             }
             return null;
         }
 
-        //private string Colts()
-        //{
-        //    Console.Clear();
-        //    Console.WriteLine("You have picked the Colts!");
-        //    Console.WriteLine("Here is the starting lineup for the Colts!");
-        //    Console.WriteLine("");
-        //    foreach (Dictionary<string, dynamic> player in coltsPlayerArray)
-        //    {
-        //        Console.WriteLine($"Name:{player[nameKey]}, Position:{player[positionKey]}, Rating:{player[ratingKey]}");
-        //        Console.WriteLine("");
-        //    }
-        //    return null;
-        //    // Console.WriteLine(${ListOfColtsPlayers} + {Stats})
-        //}
-        //private void Jaguars()
-        //{
-        //    Console.Clear();
-        //    Console.WriteLine("You have picked the Jaguars!");
-        //    Console.WriteLine("Here is the starting lineup for the Jaguars!");
-        //    Console.WriteLine("");
-        //    foreach (Dictionary<string, dynamic> player in jaguarsPlayerArray)
-        //    {
-        //        Console.WriteLine($"Name:{player[nameKey]}, Position:{player[positionKey]}, Rating:{player[ratingKey]}");
-        //        Console.WriteLine("");
-        //    }
-        //    // Console.WriteLine(${ListOfJaguarsPlayers})
-        //}
-        //private void Texans()
-        //{
-        //    Console.Clear();
-        //    Console.WriteLine("You have picked the Texans!");
-        //    Console.WriteLine("Here is the starting lineup for the Texans!");
-        //    // Console.WriteLine(${ListOfTexansPlayers})
-        //}
-        //private void Titans()
-        //{
-        //    Console.Clear();
-        //    Console.WriteLine("You have picked the Titans!");
-        //    Console.WriteLine("Here is the starting lineup for the Titans!");
-        //    // Console.WriteLine(${ListOfTitansPlayers})
-        //}
-        //private void Buccaneers()
-        //{
-        //    Console.Clear();
-        //    Console.WriteLine("You have picked the Buccaneers!");
-        //    Console.WriteLine("Here is the starting lineup for the Buccaneers!");
-        //    // Console.WriteLine(${ListOfBuccaneersPlayers})
-        //}
-        //private void Falcons()
-        //{
-        //    Console.Clear();
-        //    Console.WriteLine("You have picked the Falcons!");
-        //    Console.WriteLine("Here is the starting lineup for the Falcons!");
-        //    // Console.WriteLine(${ListOfFalconsPlayers})
-        //}
-        //private void Panthers()
-        //{
-        //    Console.Clear();
-        //    Console.WriteLine("You have picked the Panthers!");
-        //    Console.WriteLine("Here is the starting lineup for the Panthers!");
-        //    // Console.WriteLine(${ListOfPanthersPlayers})
-        //}
-        //private void Saints()
-        //{
-        //    Console.Clear();
-        //    Console.WriteLine("You have picked the Saints!");
-        //    Console.WriteLine("Here is the starting lineup for the Saints!");
-        //    // Console.WriteLine(${ListOfSaintsPlayers})
-        //}
-
-        Random random = new Random();
-        public int NormalPower()
+        private void DisplaySelectedTeam(Team selectedTeam)
         {
-            Thread.Sleep(5);                                                    // Adds a pause in the program...5 seconds?
-            int[] yards = { 0, 5, 10, 15 };
-            int yardsCovered = random.Next(yards.Length);
-            return yardsCovered;
-        }
-
-        public int IntermediatePower()
-        {
-            Thread.Sleep(5);
-            int[] yards = { 0, 5, 10, 15, 20 };
-            int yardsCovered = random.Next(yards.Length);
-            return yardsCovered;
-        }
-
-        public int AdvancedPower()
-        {
-            Thread.Sleep(5);
-            int[] yards = { 0, 5, 10, 15, 20, 25 };
-            int yardsCovered = random.Next(yards.Length);
-            return yardsCovered;
-        }
-
-        //use counter to add "yards covered". When reaches 75 total, touchdown!
-        private string GetUsersChoiceForTeam()
-        {
-            Console.WriteLine(
-                "\n1. Colts\n" +
-                "2. Jaguars\n" +
-                "3. Texans\n" +
-                "4. Titans\n" +
-                "5. Buccaneers\n" +
-                "6. Falcons\n" +
-                "7. Panthers\n" +
-                "8. Saints\n\n" +
-                "9. Return to the Main Menu");
-            string teamSelection = Console.ReadLine();
-            switch (teamSelection)
+            Console.Clear();
+            Console.WriteLine($"You have picked the {selectedTeam}!");
+            Console.WriteLine($"Here is the starting lineup for the {selectedTeam}!\n");
+            foreach (Dictionary<string, dynamic> player in GetPlayerArrayForTeam(selectedTeam)) // get from specific team array
             {
-                case "1":
-                case "2":
-                case "3":
-                case "4":
-                case "5":
-                case "6":
-                case "7":
-                case "8":
-                    return teamSelection;
-                default:
-                    return "9";
+                Console.WriteLine($"Name:{player[nameKey]}, Position:{player[positionKey]}, Rating:{player[ratingKey]}");
             }
+            PressAnyKeyToContinue();
+        }
+
+        // Convenience Function
+        private void PressAnyKeyToContinue()
+        {
+            Console.WriteLine(PleasePressAnyKeyToContinue);
+            Console.ReadKey();
+        }
+
+        private (bool alternateOptionChosen, int numericSelection) PromptUserToMakeNumericSelection(string prompt, string[] options, string alternateOption)
+        {
+            bool userChoseAlternateOption = false;
+            int usersNumericChoice = 0;
+            bool userEnteredValidChoice = false;
+
+            while (userEnteredValidChoice == false) // keep prompting until user enters a valid choice
+            {
+                Console.Clear();
+                Console.WriteLine(prompt); // display the prompt
+                string buildOptionsList = "\n";
+                int index = 1;
+                foreach (string option in options) // build options listing
+                {
+                    buildOptionsList = buildOptionsList + index.ToString() + ". " + option + "\n";
+                    index++;
+                }
+                // it is important to note that index is now the value of the last item in the list (the number of the alternate option)
+                buildOptionsList = buildOptionsList + "\n" + index.ToString() + ". " + alternateOption + "\n"; // add alternate option to listing
+                Console.WriteLine(buildOptionsList); // display the main options and the alternate option
+
+                string readString = Console.ReadLine();
+                if (int.TryParse(readString, out int parsedNumber)) // yes, readString was parsed as a number, parsedNumber is now valid
+                {
+                    if (parsedNumber == index) // did the user choose the alternate option (the last option in the list)
+                    {
+                        userChoseAlternateOption = true;
+                        userEnteredValidChoice = true; // will not keep prompting user for valid input since user entered a valid number
+                    }
+                    else if (parsedNumber > 0 && parsedNumber < index) // make sure the valid number entered is in the range of the available options
+                    {
+                        usersNumericChoice = parsedNumber;
+                        userEnteredValidChoice = true; // will not keep prompting user for valid input since user entered a valid number
+                    }
+                    else
+                    {
+                        // the user has entered a number but the number was not a valid choice, user will be prompted to try again
+                    }
+                }
+                else
+                {
+                    // the user entered a non-numeric number that could not be parsed as a number, user will be prompted to try again
+                }
+                if (userEnteredValidChoice == false)
+                {
+                    Console.WriteLine("\nPlease choose a valid option from the list above");
+                    PressAnyKeyToContinue();
+                }
+            }
+            return (userChoseAlternateOption, usersNumericChoice);
         }
     }
 }

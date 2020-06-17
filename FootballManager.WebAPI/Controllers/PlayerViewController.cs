@@ -19,6 +19,7 @@ namespace FootballManager.WebAPI.Controllers
             return View(playerService.GetPlayer());
         }
         
+        //Create
         [HttpGet] //This is where I get html from
         public ActionResult Create()
         {
@@ -32,7 +33,7 @@ namespace FootballManager.WebAPI.Controllers
             {
                 PlayerController pc = new PlayerController();
                 pc.Post(cp);
-                return RedirectToAction("Index", "Home"); //LOOKUP: redirect to action (take to another page) 
+                return RedirectToAction("Index", "Home");
             }
             else
             {
@@ -63,12 +64,13 @@ namespace FootballManager.WebAPI.Controllers
 
         //Delete
         [HttpGet]
-        public ActionResult Delete()
+        public ActionResult Delete(int id)
         {
-            return View();
+            PlayerService playerService = new PlayerService();
+            return View(playerService.GetPlayerByID(id));
         }
         [HttpPost]
-        public ActionResult Delete(int id)
+        public ActionResult DeletePlayer(int id)
         {
             if (this.ModelState.IsValid)
             {
